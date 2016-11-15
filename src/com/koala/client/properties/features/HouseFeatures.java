@@ -11,6 +11,8 @@ public class HouseFeatures {
 
     private House house;
 
+
+
     public HouseFeatures(House house) {
         this.house = house;
 
