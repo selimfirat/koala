@@ -1,7 +1,7 @@
 package com.koala.client.properties;
 
 import com.koala.client.properties.features.HouseFeatures;
-import com.koala.client.roles.Seller;
+import com.koala.client.roles.User;
 import com.koala.client.utils.UID;
 import com.koala.client.utils.UIDController;
 import com.koala.client.utils.UIDTypes;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 public abstract class House {
 
     private UID uid;
-    private Seller seller;
+    private User seller;
     private HouseFeatures houseFeatures;
 
     public House(){
@@ -39,11 +39,11 @@ public abstract class House {
         this.houseFeatures = houseFeatures;
     }
 
-    public Seller getSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    public void setSeller(Seller seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
     }
 }
