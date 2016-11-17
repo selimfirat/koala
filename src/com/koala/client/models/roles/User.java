@@ -1,4 +1,4 @@
-package com.koala.client.roles;
+package com.koala.client.models.roles;
 
 import com.koala.client.utils.UID;
 
@@ -10,6 +10,7 @@ import com.koala.client.utils.UID;
 public class User {
 
     private UID uid;
+    private String fullName;
 
     public UID getUid() {
         return uid;
@@ -17,5 +18,13 @@ public class User {
 
     public void setUid(UID uid) {
         this.uid = uid;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

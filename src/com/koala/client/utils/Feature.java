@@ -1,5 +1,6 @@
-package com.koala.client.properties.features;
+package com.koala.client.utils;
 
+import com.koala.client.models.properties.features.HouseFeatures;
 import javafx.beans.NamedArg;
 import javafx.util.Pair;
 /**

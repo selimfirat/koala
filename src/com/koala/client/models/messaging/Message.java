@@ -1,7 +1,9 @@
-package com.koala.client.messaging;
+package com.koala.client.models.messaging;
 
-import com.koala.client.roles.User;
+import com.koala.client.models.roles.User;
 import com.koala.client.utils.UID;
+
+import java.util.Date;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -14,6 +16,8 @@ public class Message {
     private User from;
     private User to;
     private String message;
+    private Date date;
+    private Message topLevelMessage;
 
     public Message(UID uid, User from, User to, String message) {
         this.uid = uid;
@@ -52,5 +56,21 @@ public class Message {
 
     public void setUid(UID uid) {
         this.uid = uid;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Message getTopLevelMessage() {
+        return topLevelMessage;
+    }
+
+    public void setTopLevelMessage(Message topLevelMessage) {
+        this.topLevelMessage = topLevelMessage;
     }
 }
