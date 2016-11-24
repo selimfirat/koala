@@ -1,6 +1,6 @@
 package com.koala.app.client.data.house;
 
-import com.koala.app.client.data.user.UserEntity;
+import com.koala.app.client.data.user.User;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -8,6 +8,7 @@ import com.koala.app.client.data.user.UserEntity;
  * Creation Date: 10.11.2016.
  */
 public class House {
+
 
     public enum Types {
         FOR_RENT,
@@ -29,22 +30,27 @@ public class House {
     }
 
 
-    private UserEntity seller;
+    private final String id;
+    private User seller;
     private House.Types houseType;
     private HouseFeatures houseFeatures;
 
-    public House(UserEntity seller, House.Types houseType, HouseFeatures houseFeatures){
+    public House(String id, User seller, Types houseType, HouseFeatures houseFeatures){
+        this.id = id;
         this.seller = seller;
         this.houseType = houseType;
         this.houseFeatures = houseFeatures;
 
     }
+    public String getId() {
+        return id;
+    }
 
-    public UserEntity getSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    public void setSeller(UserEntity seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
     }
 

@@ -13,11 +13,11 @@ public interface HousesDataSource {
 
     Observable<List<House>> getHouses();
 
-    Observable<House> getHouse(String HouseId);
+    Observable<House> getHouseWithId(String houseId);
 
-    void addHouse(House House);
+    void addHouse(House house);
 
     void updateHouse(House house);
 
-    void deleteHouse(String HouseId);
+    void deleteHouse(String houseId);
 }

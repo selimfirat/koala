@@ -1,6 +1,6 @@
 package com.koala.app.client.data.message;
 
-import com.koala.app.client.data.user.UserEntity;
+import com.koala.app.client.data.user.User;
 
 import java.util.Date;
 
@@ -11,13 +11,13 @@ import java.util.Date;
  */
 public class Message {
 
-    private UserEntity from;
-    private UserEntity to;
+    private User from;
+    private User to;
     private String message;
     private Date date;
     private Message topLevelMessage;
 
-    public Message(UserEntity from, UserEntity to, String message) {
+    public Message(User from, User to, String message) {
         this.from = from;
         this.to = to;
         this.message = message;
@@ -31,19 +31,19 @@ public class Message {
         this.message = message;
     }
 
-    public UserEntity getTo() {
+    public User getTo() {
         return to;
     }
 
-    public void setTo(UserEntity to) {
+    public void setTo(User to) {
         this.to = to;
     }
 
-    public UserEntity getFrom() {
+    public User getFrom() {
         return from;
     }
 
-    public void setFrom(UserEntity from) {
+    public void setFrom(User from) {
         this.from = from;
     }
 
