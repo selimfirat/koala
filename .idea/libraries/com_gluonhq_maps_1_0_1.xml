@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="com.gluonhq:maps:1.0.1" type="repository">
+    <properties maven-id="com.gluonhq:maps:1.0.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/maps-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/charm-down-plugin-storage-3.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/charm-down-core-3.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/charm-down-plugin-position-3.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/libs/maps-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
