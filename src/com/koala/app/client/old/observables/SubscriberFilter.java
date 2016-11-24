@@ -1,0 +1,26 @@
+package com.koala.app.client.old.observables;
+
+import com.koala.app.client.data.house.House;
+import rx.Subscriber;
+
+/**
+ * Author: Selim Fırat Yılmaz - mrsfy
+ * Version: 1.0.0
+ * Creation Date: 23.11.2016.
+ */
+public class SubscriberFilter extends Subscriber<House> {
+    @Override
+    public void onCompleted() {
+
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onNext(House house) {
+
+    }
+}

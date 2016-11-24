@@ -21,7 +21,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage.initStyle(StageStyle.DECORATED);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         Scene mainWindow = getScene("main.fxml");
         stage.setScene(mainWindow);
@@ -32,7 +32,7 @@ public class App extends Application {
 
         Scene scene = null;
         try {
-            scene = new Scene(FXMLLoader.load(App.class.getResource("../resources/" + fileName)));
+            scene = new Scene(FXMLLoader.load(App.class.getResource("resources/" + fileName)));
         } catch (IOException e) {
             e.printStackTrace();
         }
