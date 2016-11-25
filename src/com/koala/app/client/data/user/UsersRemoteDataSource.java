@@ -10,9 +10,9 @@ import java.util.Map;
  * Version: 1.0.0
  * Creation Date: 24.11.2016.
  */
-public class UsersLocalDataSource implements UsersDataSource {
+public class UsersRemoteDataSource implements UsersDataSource {
 
-    private static UsersLocalDataSource _instance;
+    private static UsersRemoteDataSource _instance;
 
     private final static Map<String, User> users;
 
@@ -20,11 +20,11 @@ public class UsersLocalDataSource implements UsersDataSource {
         users = new HashMap<>();
     }
 
-    private UsersLocalDataSource() { }
+    private UsersRemoteDataSource() { }
 
-    public UsersLocalDataSource getInstance() {
+    public UsersRemoteDataSource getInstance() {
         if (_instance == null)
-            _instance = new UsersLocalDataSource();
+            _instance = new UsersRemoteDataSource();
 
         return _instance;
     }

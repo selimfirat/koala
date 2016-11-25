@@ -13,17 +13,19 @@ public class MessagesRepository implements MessagesDataSource {
 
     private static MessagesRepository _instance;
 
-    private MessagesLocalDataSource messagesLocalDataSource;
+    private MessagesDataSource messagesLocalDataSource;
+    private MessagesDataSource messagesRemoteDataSource;
 
-    private MessagesRepository(MessagesLocalDataSource MessagesLocalDataSource) {
+    private MessagesRepository(MessagesDataSource messagesLocalDataSource, MessagesDataSource messagesRemoteDataSource) {
 
-        this.messagesLocalDataSource = MessagesLocalDataSource;
+        this.messagesLocalDataSource = messagesLocalDataSource;
+        this.messagesRemoteDataSource = messagesRemoteDataSource;
 
     }
 
-    public static MessagesRepository getInstance(MessagesLocalDataSource messagesLocalDataSource) {
+    public static MessagesRepository getInstance(MessagesDataSource messagesLocalDataSource, MessagesDataSource messagesRemoteDataSource) {
         if (_instance == null)
-            _instance = new MessagesRepository(messagesLocalDataSource);
+            _instance = new MessagesRepository(messagesLocalDataSource, messagesRemoteDataSource);
 
         return _instance;
     }

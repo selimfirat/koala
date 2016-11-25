@@ -1,5 +1,5 @@
-package com.koala.app.client;
-/**
+package com.koala.app.client.presentation;
+/*
  * Author: Selim Fırat Yılmaz - mrsfy
  * Version: 1.0.0
  * Creation Date: 22.11.2016.
@@ -23,7 +23,7 @@ public class App extends Application {
     public void start(Stage stage) {
         stage.initStyle(StageStyle.UNDECORATED);
 
-        Scene mainWindow = getScene("presentation/main/main.fxml");
+        Scene mainWindow = getScene("main/main.fxml");
         stage.setScene(mainWindow);
         stage.show();
     }

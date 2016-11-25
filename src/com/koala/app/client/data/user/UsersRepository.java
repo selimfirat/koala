@@ -11,17 +11,17 @@ public class UsersRepository implements UsersDataSource {
 
     private static UsersRepository _instance;
 
-    private UsersLocalDataSource usersLocalDataSource;
+    private UsersRemoteDataSource usersRemoteDataSource;
 
-    private UsersRepository(UsersLocalDataSource UsersLocalDataSource) {
+    private UsersRepository(UsersRemoteDataSource usersRemoteDataSource) {
 
-        this.usersLocalDataSource = UsersLocalDataSource;
+        this.usersRemoteDataSource = usersRemoteDataSource;
 
     }
 
-    public static UsersRepository getInstance(UsersLocalDataSource usersLocalDataSource) {
+    public static UsersRepository getInstance(UsersRemoteDataSource usersRemoteDataSource) {
         if (_instance == null)
-            _instance = new UsersRepository(usersLocalDataSource);
+            _instance = new UsersRepository(usersRemoteDataSource);
 
         return _instance;
     }

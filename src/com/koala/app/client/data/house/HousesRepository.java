@@ -13,17 +13,19 @@ public class HousesRepository implements HousesDataSource {
 
     private static HousesRepository _instance;
 
-    private HousesLocalDataSource housesLocalDataSource;
+    private HousesDataSource housesLocalDataSource;
+    private HousesDataSource housesRemoteDataSource;
 
-    private HousesRepository(HousesLocalDataSource housesLocalDataSource) {
+    private HousesRepository(HousesDataSource housesLocalDataSource, HousesDataSource housesRemoteDataSource) {
 
         this.housesLocalDataSource = housesLocalDataSource;
+        this.housesRemoteDataSource = housesRemoteDataSource;
 
     }
 
-    public static HousesRepository getInstance(HousesLocalDataSource housesLocalDataSource) {
+    public static HousesRepository getInstance(HousesLocalDataSource housesLocalDataSource, HousesRemoteDataSource housesRemoteDataSource) {
         if (_instance == null)
-            _instance = new HousesRepository(housesLocalDataSource);
+            _instance = new HousesRepository(housesLocalDataSource, housesRemoteDataSource);
 
         return _instance;
     }
