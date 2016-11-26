@@ -7,7 +7,9 @@ package com.koala.app.client.presentation;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -23,19 +25,27 @@ public class App extends Application {
     public void start(Stage stage) {
         stage.initStyle(StageStyle.UNDECORATED);
 
-        Scene mainWindow = getScene("main/main.fxml");
-        stage.setScene(mainWindow);
+        Scene mainScene = getScene("main.fxml");
+
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+        stage.setScene(mainScene);
         stage.show();
     }
-
-    private Scene getScene(String fileUrl) {
+    private Scene getScene(String sceneName) {
 
         Scene scene = null;
         try {
-            scene = new Scene(FXMLLoader.load(App.class.getResource(fileUrl)));
+            scene = new Scene(FXMLLoader.load(Transition.class.getResource("resources/" + sceneName)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return scene;
     }
 }

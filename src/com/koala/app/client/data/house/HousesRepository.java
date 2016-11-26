@@ -36,8 +36,8 @@ public class HousesRepository implements HousesDataSource {
     }
 
     @Override
-    public Observable<House> getHouseWithId(String houseId) {
-        return housesLocalDataSource.getHouseWithId(houseId);
+    public Observable<House> getHouseById(String houseId) {
+        return housesLocalDataSource.getHouseById(houseId);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class MessagesRepository implements MessagesDataSource {
     }
 
     @Override
-    public Observable<Message> getMessageWithId(String MessageId) {
+    public Observable<Message> getMessageById(String MessageId) {
         return null;
     }
 

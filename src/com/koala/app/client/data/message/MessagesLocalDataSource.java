@@ -37,7 +37,7 @@ public class MessagesLocalDataSource implements MessagesDataSource {
     }
 
     @Override
-    public Observable<Message> getMessageWithId(String userId) {
+    public Observable<Message> getMessageById(String userId) {
         return null;
     }
 

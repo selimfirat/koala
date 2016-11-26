@@ -30,7 +30,7 @@ public class UsersRemoteDataSource implements UsersDataSource {
     }
 
     @Override
-    public Observable<User> getUserWithId(String userId) {
+    public Observable<User> getUserById(String userId) {
         return null;
     }
 

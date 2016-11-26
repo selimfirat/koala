@@ -39,7 +39,7 @@ public class HousesRemoteDataSource implements HousesDataSource {
     }
 
     @Override
-    public Observable<House> getHouseWithId(String houseId) {
+    public Observable<House> getHouseById(String houseId) {
         final House house = houses.get(houseId);
 
         if (house != null)

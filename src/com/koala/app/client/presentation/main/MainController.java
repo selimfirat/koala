@@ -12,4 +12,5 @@ public class MainController implements IController {
     public void init() {
 
     }
+
 }

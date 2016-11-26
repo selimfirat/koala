@@ -9,7 +9,7 @@ import rx.Observable;
  */
 public interface UsersDataSource {
 
-    Observable<User> getUserWithId(String userId);
+    Observable<User> getUserById(String userId);
 
     Observable<User> register(User user);
 

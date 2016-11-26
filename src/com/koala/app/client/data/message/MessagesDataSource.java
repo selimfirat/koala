@@ -13,7 +13,7 @@ public interface MessagesDataSource {
 
     Observable<List<Message>> getMessages();
 
-    Observable<Message> getMessageWithId(String userId);
+    Observable<Message> getMessageById(String userId);
 
     void sendMessage(Message message);
 

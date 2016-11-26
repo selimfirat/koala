@@ -12,4 +12,8 @@ public class LoginController implements IController {
     public void init() {
 
     }
+
+    public void validateUserInput() {
+
+    }
 }

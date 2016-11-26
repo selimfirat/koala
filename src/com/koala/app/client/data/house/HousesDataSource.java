@@ -13,7 +13,7 @@ public interface HousesDataSource {
 
     Observable<List<House>> getHouses();
 
-    Observable<House> getHouseWithId(String houseId);
+    Observable<House> getHouseById(String houseId);
 
     void addHouse(House house);
 
