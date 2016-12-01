@@ -1,79 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="702.0" style="" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koala.app.client.presentation.main.MainController">
-  <children>
-    <SplitPane dividerPositions="0.69" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <items>
-        <AnchorPane prefHeight="551.0" prefWidth="488.0">
-          <children>
-                  <TextField layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="171.0" promptText="Search">
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </TextField>
-          </children>
-        </AnchorPane>
-        <AnchorPane prefHeight="478.0" prefWidth="132.0">
-          <children>
-              <HBox prefHeight="61.0" prefWidth="221.0" spacing="8">
-                  <children>
-                      <Button text="Login" />
-                      <Button text="Register" />
-                  </children>
-                     <opaqueInsets>
-                        <Insets left="5.0" />
-                     </opaqueInsets>
-              </HBox>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="58.0" style="&#10;" text="Details" textAlignment="CENTER" wrapText="false">
-                     <font>
-                <Font size="18.0" fx:id="x1" />
-                     </font>
-                     <textFill>
-                <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
-                     </textFill></Label>
-                  <Accordion layoutY="90.0" prefHeight="27.0" prefWidth="221.0">
-                    <panes>
-                      <TitledPane animated="true" text="Newest">
-                        <content>
-                          <AnchorPane minHeight="300.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="Most Popular">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="219.0" style="-fx-min-height: 300;">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </AnchorPane>
-                        </content>
-                      </TitledPane>
-                      <TitledPane animated="false" text="Cheapest">
-                        <content>
-                          <AnchorPane style="-fx-min-height: 300;" />
-                        </content>
-                      </TitledPane>
-                    </panes>
-                  </Accordion>
-          </children>
-        </AnchorPane>
-      </items>
-    </SplitPane>
-  </children>
-  <stylesheets>
-
-  </stylesheets>
-</VBox>
+<?import com.lynden.gmapsfx.GoogleMapView?>
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koala.app.client.presentation.main.MainController">
+   <right>
+      <VBox prefHeight="619.0" prefWidth="275.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                  <Button mnemonicParsing="false" onAction="#openLoginDialog" text="Login" />
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#openRegisterDialog" text="Register" />
+              </items>
+            </ToolBar>
+            <Accordion fx:id="importantsAccordion">
+              <panes>
+                <TitledPane animated="true" text="untitled 1">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="99999" />
+                  </content>
+                </TitledPane>
+                <TitledPane animated="true" text="untitled 2">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="99999" />
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="untitled 3">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="99999" />
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
+            <VBox VBox.vgrow="ALWAYS" />
+            <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="275.0" progress="100.0" />
+         </children>
+      </VBox>
+   </right>
+    <left>
+        <GoogleMapView fx:id="mapView"/>
+    </left>
+</BorderPane>

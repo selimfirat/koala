@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane prefHeight="242.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koala.app.client.presentation.login.LoginController">
+   <center>
+      <GridPane hgap="15.0" prefHeight="107.0" prefWidth="433.0" vgap="5.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" maxWidth="120.0" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="NEVER" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="NEVER" />
+          <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="NEVER" />
+        </rowConstraints>
+         <children>
+            <Label text="Username" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="usernameTF" promptText="Username" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="Password" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordTF" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+         <padding>
+            <Insets left="25.0" right="25.0" />
+         </padding>
+      </GridPane>
+   </center>
+   <top>
+      <ImageView fitHeight="93.0" fitWidth="433.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@images/loginHeader.jpg" />
+         </image>
+      </ImageView>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="433.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onClickCancel" prefHeight="39.0" prefWidth="85.0" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#onClickLogin" prefHeight="39.0" prefWidth="119.0" text="Login" />
+         </children>
+         <padding>
+            <Insets right="25.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

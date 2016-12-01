@@ -25,24 +25,24 @@ public class UsersRepository implements UsersDataSource {
 
         return _instance;
     }
-    
+
     @Override
-    public Observable<User> getUserById(String userId) {
+    public Observable<User> getUser(String userId) {
         return null;
     }
 
     @Override
-    public Observable<User> register(User user) {
+    public Observable<User> getUser(String username, String password) {
         return null;
     }
 
     @Override
-    public Observable<User> login(User user) {
+    public Observable<Void> addUser(User user) {
         return null;
     }
 
     @Override
-    public void updateUser(User user) {
-
+    public Observable<Void> updateUser(User user) {
+        return null;
     }
 }

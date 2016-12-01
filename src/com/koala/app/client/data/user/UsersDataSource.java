@@ -9,11 +9,9 @@ import rx.Observable;
  */
 public interface UsersDataSource {
 
-    Observable<User> getUserById(String userId);
+    Observable<User> getUser(String userId);
+    Observable<User> getUser(String username, String password);
 
-    Observable<User> register(User user);
-
-    Observable<User> login(User user);
-
-    void updateUser(User user);
+    Observable<Void> addUser(User user);
+    Observable<Void> updateUser(User user);
 }

@@ -37,11 +37,12 @@ public class App extends Application {
         stage.setScene(mainScene);
         stage.show();
     }
+
     private Scene getScene(String sceneName) {
 
         Scene scene = null;
         try {
-            scene = new Scene(FXMLLoader.load(Transition.class.getResource("resources/" + sceneName)));
+            scene = new Scene(FXMLLoader.load(App.class.getResource("resources/" + sceneName)));
         } catch (IOException e) {
             e.printStackTrace();
         }

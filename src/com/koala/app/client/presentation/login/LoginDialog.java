@@ -7,8 +7,8 @@ import com.koala.app.client.presentation.CustomDialog;
  * Version: 1.0.0
  * Creation Date: 26.11.2016.
  */
-public class Login extends CustomDialog {
-    public Login(String dialogName) {
+public class LoginDialog extends CustomDialog {
+    public LoginDialog() {
         super("login.fxml");
     }
 }
