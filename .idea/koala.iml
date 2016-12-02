@@ -12,6 +12,7 @@
     <orderEntry type="library" exported="" name="io.reactivex:rxjava:1.2.2" level="project" />
     <orderEntry type="library" exported="" name="org.controlsfx:controlsfx:8.40.12" level="project" />
     <orderEntry type="library" exported="" name="io.reactivex:rxjavafx:0.3.0" level="project" />
-    <orderEntry type="library" name="com.lynden:GMapsFX:2.0.8" level="project" />
+    <orderEntry type="library" name="com.lynden:GMapsFX:2.0.9" level="project" />
+    <orderEntry type="library" name="GMapsFX-2.0.9" level="project" />
   </component>
 </module>

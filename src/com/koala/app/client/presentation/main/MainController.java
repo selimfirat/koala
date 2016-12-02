@@ -100,12 +100,12 @@ public class MainController implements IController, MapComponentInitializedListe
 
     @FXML
     public void openLoginDialog(ActionEvent event) {
-        new LoginDialog().showAndWait();
+        new LoginDialog().show();
     }
 
     @FXML
     public void openRegisterDialog(ActionEvent event) {
-        new RegisterDialog().showAndWait();
+        new RegisterDialog().show();
     }
 
     @Override
