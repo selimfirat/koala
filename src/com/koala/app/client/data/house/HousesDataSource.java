@@ -1,6 +1,6 @@
 package com.koala.app.client.data.house;
 
-import rx.Observable;
+import rx.Single;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface HousesDataSource {
 
-    Observable<List<House>> getHouses();
+    Single<List<House>> getHouses();
 
-    Observable<House> getHouseById(String houseId);
+    Single<House> getHouseById(String houseId);
 
-    void addHouse(House house);
+    Single<Void> addHouse(House house);
 
-    void updateHouse(House house);
+    Single<Void> updateHouse(House house);
 
-    void deleteHouse(String houseId);
+    Single<Void> deleteHouse(String houseId);
 }

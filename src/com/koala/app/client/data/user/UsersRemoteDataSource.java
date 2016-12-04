@@ -1,6 +1,7 @@
 package com.koala.app.client.data.user;
 
-import rx.Observable;
+import com.koala.app.client.data.socket.EchoRequest;
+import rx.Single;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,12 +15,6 @@ public class UsersRemoteDataSource implements UsersDataSource {
 
     private static UsersRemoteDataSource _instance;
 
-    private final static Map<String, User> users;
-
-    static {
-        users = new HashMap<>();
-    }
-
     private UsersRemoteDataSource() { }
 
     public static UsersRemoteDataSource getInstance() {
@@ -30,22 +25,30 @@ public class UsersRemoteDataSource implements UsersDataSource {
     }
 
     @Override
-    public Observable<User> getUser(String userId) {
-        return null;
+    public Single<User> getUser(String userId) {
+        return new EchoRequest<User>(EchoRequest.Type.GET_USER_BY_ID).send(userId);
     }
 
     @Override
-    public Observable<User> getUser(String username, String password) {
-        return null;
+    public Single<User> getUser(String username, String password) {
+        Map<String, String> data = new HashMap<>();
+        data.put("username", username);
+        data.put("password", password);
+        return new EchoRequest<User>(EchoRequest.Type.GET_USER_BY_USERNAME_AND_PASSWORD).send(data);
     }
 
     @Override
-    public Observable<Void> addUser(User user) {
-        return null;
+    public Single<Void> addUser(User user) {
+        return saveUser(user);
     }
 
     @Override
-    public Observable<Void> updateUser(User user) {
-        return null;
+    public Single<Void> updateUser(User user) {
+        return saveUser(user);
     }
+
+    private Single<Void> saveUser(User user) {
+        return new EchoRequest<Void>(EchoRequest.Type.SAVE_USER).send(user);
+    }
+
 }

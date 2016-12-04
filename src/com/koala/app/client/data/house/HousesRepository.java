@@ -1,6 +1,6 @@
 package com.koala.app.client.data.house;
 
-import rx.Observable;
+import rx.Single;
 
 import java.util.List;
 
@@ -13,45 +13,43 @@ public class HousesRepository implements HousesDataSource {
 
     private static HousesRepository _instance;
 
-    private HousesDataSource housesLocalDataSource;
     private HousesDataSource housesRemoteDataSource;
 
-    private HousesRepository(HousesDataSource housesLocalDataSource, HousesDataSource housesRemoteDataSource) {
+    private HousesRepository( HousesDataSource housesRemoteDataSource) {
 
-        this.housesLocalDataSource = housesLocalDataSource;
         this.housesRemoteDataSource = housesRemoteDataSource;
 
     }
 
-    public static HousesRepository getInstance(HousesLocalDataSource housesLocalDataSource, HousesRemoteDataSource housesRemoteDataSource) {
+    public static HousesRepository getInstance(HousesRemoteDataSource housesRemoteDataSource) {
         if (_instance == null)
-            _instance = new HousesRepository(housesLocalDataSource, housesRemoteDataSource);
+            _instance = new HousesRepository(housesRemoteDataSource);
 
         return _instance;
     }
 
     @Override
-    public Observable<List<House>> getHouses() {
-        return housesLocalDataSource.getHouses();
+    public Single<List<House>> getHouses() {
+        return housesRemoteDataSource.getHouses();
     }
 
     @Override
-    public Observable<House> getHouseById(String houseId) {
-        return housesLocalDataSource.getHouseById(houseId);
+    public Single<House> getHouseById(String houseId) {
+        return housesRemoteDataSource.getHouseById(houseId);
     }
 
     @Override
-    public void addHouse(House house) {
-        housesLocalDataSource.addHouse(house);
+    public Single<Void> addHouse(House house) {
+        return housesRemoteDataSource.addHouse(house);
     }
 
     @Override
-    public void updateHouse(House house) {
-        housesLocalDataSource.updateHouse(house);
+    public Single<Void> updateHouse(House house) {
+        return housesRemoteDataSource.updateHouse(house);
     }
 
     @Override
-    public void deleteHouse(String houseId) {
-        housesLocalDataSource.deleteHouse(houseId);
+    public Single<Void> deleteHouse(String houseId) {
+        return housesRemoteDataSource.deleteHouse(houseId);
     }
 }

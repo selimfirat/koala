@@ -2,15 +2,18 @@ package com.koala.app.client.domain.authentication;
 
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.domain.Repositories;
+import com.koala.app.client.domain.SingleUseCase;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
+import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
  * Version: 1.0.0
  * Creation Date: 25.11.2016.
  */
-public class LoginUseCase extends UseCase {
+public class LoginUseCase extends SingleUseCase {
 
     private String username, password;
 
@@ -19,8 +22,36 @@ public class LoginUseCase extends UseCase {
         this.password = password;
     }
 
+
     @Override
-    protected Observable<User> buildUseCaseObservable() {
-        return Repositories.getUsersRepository().getUser(username, password);
+    protected Single buildUseCaseSingle() {
+        return Repositories.getUsersRepository().getUser(username, password).flatMap(user -> {
+            if (user == null)
+                return Single.error(new WrongUsernameOrPasswordException());
+
+            return Single.just(user);
+        });
+    }
+
+    private class WrongUsernameOrPasswordException extends Throwable {
+        public WrongUsernameOrPasswordException() {
+            super();
+        }
+
+        public WrongUsernameOrPasswordException(String message) {
+            super(message);
+        }
+
+        public WrongUsernameOrPasswordException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public WrongUsernameOrPasswordException(Throwable cause) {
+            super(cause);
+        }
+
+        protected WrongUsernameOrPasswordException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+            super(message, cause, enableSuppression, writableStackTrace);
+        }
     }
 }

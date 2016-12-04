@@ -51,6 +51,7 @@ public class LoginController implements IController {
             @Override
             public void onNext(User user) {
                 // on successful login
+
             }
 
             @Override
@@ -58,19 +59,6 @@ public class LoginController implements IController {
                 // on invalid login or error
             }
         });
-    }
-
-    private class LoginSubscriber extends DefaultSubscriber<User> {
-
-        @Override
-        public void onError(Throwable throwable) {
-            super.onError(throwable);
-        }
-
-        @Override
-        public void onNext(User user) {
-
-        }
     }
 
 }

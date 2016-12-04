@@ -1,6 +1,6 @@
 package com.koala.app.client.data.user;
 
-import rx.Observable;
+import rx.Single;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -27,22 +27,22 @@ public class UsersRepository implements UsersDataSource {
     }
 
     @Override
-    public Observable<User> getUser(String userId) {
+    public Single<User> getUser(String userId) {
         return null;
     }
 
     @Override
-    public Observable<User> getUser(String username, String password) {
+    public Single<User> getUser(String username, String password) {
         return null;
     }
 
     @Override
-    public Observable<Void> addUser(User user) {
+    public Single<Void> addUser(User user) {
         return null;
     }
 
     @Override
-    public Observable<Void> updateUser(User user) {
+    public Single<Void> updateUser(User user) {
         return null;
     }
 }

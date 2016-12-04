@@ -1,10 +1,9 @@
 package com.koala.app.client.data.house;
 
-import rx.Observable;
+import com.koala.app.client.data.socket.EchoRequest;
+import rx.Single;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -14,12 +13,6 @@ import java.util.Map;
 public class HousesRemoteDataSource implements HousesDataSource {
 
     private static HousesRemoteDataSource _instance;
-
-    private final static Map<String, House> houses;
-
-    static {
-        houses = new HashMap<>();
-    }
 
 
     private HousesRemoteDataSource() { }
@@ -32,39 +25,32 @@ public class HousesRemoteDataSource implements HousesDataSource {
     }
 
     @Override
-    public Observable<List<House>> getHouses() {
-        return Observable
-                .from(houses.values())
-                .toList();
+    public Single<List<House>> getHouses() {
+        return new EchoRequest<List<House>>(EchoRequest.Type.GET_HOUSES).send();
     }
 
     @Override
-    public Observable<House> getHouseById(String houseId) {
-        final House house = houses.get(houseId);
-
-        if (house != null)
-            return Observable.just(house);
-        else
-            return Observable.empty();
+    public Single<House> getHouseById(String houseId) {
+        return new EchoRequest<House>(EchoRequest.Type.GET_HOUSE_BY_ID).send(houseId);
     }
 
     @Override
-    public void addHouse(House house) {
-        addOrUpdate(house);
+    public Single<Void> addHouse(House house) {
+        return updateHouse(house);
     }
 
     @Override
-    public void updateHouse(House house) {
-        addOrUpdate(house);
+    public Single<Void> updateHouse(House house) {
+        return saveHouse(house);
+    }
+
+    private Single<Void> saveHouse(House house) {
+        return new EchoRequest<Void>(EchoRequest.Type.SAVE_HOUSE).send(house);
     }
 
     @Override
-    public void deleteHouse(String houseId) {
-        houses.remove(houseId);
+    public Single<Void> deleteHouse(String houseId) {
+        return new EchoRequest<Void>(EchoRequest.Type.DELETE_HOUSE_BY_ID).send(houseId);
     }
 
-
-    private void addOrUpdate(House house) {
-        houses.put(house.getId(), house);
-    }
 }

@@ -1,6 +1,6 @@
 package com.koala.app.client.data.user;
 
-import rx.Observable;
+import rx.Single;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -9,9 +9,9 @@ import rx.Observable;
  */
 public interface UsersDataSource {
 
-    Observable<User> getUser(String userId);
-    Observable<User> getUser(String username, String password);
+    Single<User> getUser(String userId);
+    Single<User> getUser(String username, String password);
 
-    Observable<Void> addUser(User user);
-    Observable<Void> updateUser(User user);
+    Single<Void> addUser(User user);
+    Single<Void> updateUser(User user);
 }
