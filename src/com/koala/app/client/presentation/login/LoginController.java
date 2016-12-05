@@ -2,6 +2,7 @@ package com.koala.app.client.presentation.login;
 
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.domain.DefaultSubscriber;
+import com.koala.app.client.domain.SingleUseCase;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.authentication.LoginUseCase;
 import com.koala.app.client.presentation.IController;
@@ -11,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import rx.SingleSubscriber;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -25,7 +27,7 @@ public class LoginController implements IController {
     @FXML
     private PasswordField passwordTF;
 
-    private UseCase loginUseCase;
+    private SingleUseCase loginUseCase;
 
     @Override
     public void init() {
@@ -47,18 +49,16 @@ public class LoginController implements IController {
 
         loginUseCase = new LoginUseCase(username, password);
 
-        loginUseCase.execute(new DefaultSubscriber<User>() {
+        loginUseCase.execute(new SingleSubscriber() {
             @Override
-            public void onNext(User user) {
-                // on successful login
+            public void onSuccess(Object o) {
 
             }
 
             @Override
             public void onError(Throwable throwable) {
-                // on invalid login or error
+
             }
         });
     }
-
 }

@@ -1,6 +1,7 @@
 package com.koala.app.client.data.user;
 
 import com.koala.app.client.data.socket.EchoRequest;
+import com.koala.app.client.data.socket.EchoRequestType;
 import rx.Single;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class UsersRemoteDataSource implements UsersDataSource {
 
     @Override
     public Single<User> getUser(String userId) {
-        return new EchoRequest<User>(EchoRequest.Type.GET_USER_BY_ID).send(userId);
+        return new EchoRequest<User>(EchoRequestType.GET_USER_BY_ID).send(userId);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class UsersRemoteDataSource implements UsersDataSource {
         Map<String, String> data = new HashMap<>();
         data.put("username", username);
         data.put("password", password);
-        return new EchoRequest<User>(EchoRequest.Type.GET_USER_BY_USERNAME_AND_PASSWORD).send(data);
+        return new EchoRequest<User>(EchoRequestType.GET_USER_BY_USERNAME_AND_PASSWORD).send(data);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class UsersRemoteDataSource implements UsersDataSource {
     }
 
     private Single<Void> saveUser(User user) {
-        return new EchoRequest<Void>(EchoRequest.Type.SAVE_USER).send(user);
+        return new EchoRequest<Void>(EchoRequestType.SAVE_USER).send(user);
     }
 
 }

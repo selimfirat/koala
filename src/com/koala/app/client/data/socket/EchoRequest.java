@@ -7,13 +7,9 @@ import rx.Single;
  */
 public class EchoRequest<T> {
 
-    public enum Type {
-        GET_HOUSE_BY_ID, SAVE_HOUSE, DELETE_HOUSE_BY_ID, ADD_USER, GET_USER_BY_USERNAME_AND_PASSWORD, SAVE_USER, GET_USER_BY_ID, GET_HOUSES
-    }
+    private EchoRequestType type;
 
-    private EchoRequest.Type type;
-
-    public EchoRequest(EchoRequest.Type type) {
+    public EchoRequest(EchoRequestType type) {
         this.type = type;
     }
 
