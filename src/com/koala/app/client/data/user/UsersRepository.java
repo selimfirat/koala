@@ -1,48 +1,50 @@
 package com.koala.app.client.data.user;
 
-import rx.Single;
+import com.koala.app.client.data.house.HousesRepository;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+import rx.Observable;
+import rx.Subscriber;
 
 /**
- * Author: Selim Fırat Yılmaz - mrsfy
- * Version: 1.0.0
- * Creation Date: 24.11.2016.
+ * Created by mrsfy on 03-Dec-16.
  */
-public class UsersRepository implements UsersDataSource {
+
+public class UsersRepository {
 
     private static UsersRepository _instance;
 
-    private UsersRemoteDataSource usersRemoteDataSource;
-
-    private UsersRepository(UsersRemoteDataSource usersRemoteDataSource) {
-
-        this.usersRemoteDataSource = usersRemoteDataSource;
-
-    }
-
-    public static UsersRepository getInstance(UsersRemoteDataSource usersRemoteDataSource) {
+    public static UsersRepository getInstance() {
         if (_instance == null)
-            _instance = new UsersRepository(usersRemoteDataSource);
+            _instance = new UsersRepository();
 
         return _instance;
     }
 
-    @Override
-    public Single<User> getUser(String userId) {
-        return null;
+    private UsersRepository(){ }
+
+    public void setJongo(Jongo jongo) {
+        this.users = jongo.getCollection("users");
     }
 
-    @Override
-    public Single<User> getUser(String username, String password) {
-        return null;
+
+    private MongoCollection users;
+
+    public Observable<User> findById(String id) {
+        return Observable.just(users.findOne(id).as(User.class));
     }
 
-    @Override
-    public Single<Void> addUser(User user) {
-        return null;
+    public Observable<User> findByUsernameAndPassword(String username, String password) {
+        System.out.println(username + " : " + password);
+        return Observable.just(users.findOne("{username: #, password: #}", username, password).as(User.class));
     }
 
-    @Override
-    public Single<Void> updateUser(User user) {
-        return null;
+    public Observable<Void> save(User user) {
+        return Observable.create(subscriber -> {
+            users.save(user);
+            subscriber.onCompleted();
+        });
     }
+
+
 }

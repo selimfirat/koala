@@ -5,31 +5,48 @@ package com.koala.app.client.presentation;
  * Creation Date: 22.11.2016.
  */
 
+import com.koala.app.client.data.house.HousesRepository;
+import com.koala.app.client.data.user.UsersRepository;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.jongo.Jongo;
 
 import java.io.IOException;
 
 public class App extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+
+        Jongo jongo = new Jongo(new MongoClient(new MongoClientURI("mongodb://koala_user:koala123@ds119618.mlab.com:19618/koala")).getDB("koala"));
+        UsersRepository.getInstance().setJongo(jongo);
+        HousesRepository.getInstance().setJongo(jongo);
+
+        launch();
     }
 
     @Override
     public void start(Stage stage) {
-        stage.initStyle(StageStyle.UNDECORATED);
+        Scene mainScene = null;
+        try {
+            mainScene = new Scene(FXMLLoader.load(App.class.getResource("resources/main.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Scene mainScene = getScene("main.fxml");
+
 
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
 
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setX(bounds.getMinX());
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
@@ -38,15 +55,5 @@ public class App extends Application {
         stage.show();
     }
 
-    private Scene getScene(String sceneName) {
 
-        Scene scene = null;
-        try {
-            scene = new Scene(FXMLLoader.load(App.class.getResource("resources/" + sceneName)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return scene;
-    }
 }

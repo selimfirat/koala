@@ -2,7 +2,6 @@ package com.koala.app.client.presentation.login;
 
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.domain.DefaultSubscriber;
-import com.koala.app.client.domain.SingleUseCase;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.authentication.LoginUseCase;
 import com.koala.app.client.presentation.IController;
@@ -13,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import rx.SingleSubscriber;
+import rx.Subscriber;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -26,8 +26,6 @@ public class LoginController implements IController {
 
     @FXML
     private PasswordField passwordTF;
-
-    private SingleUseCase loginUseCase;
 
     @Override
     public void init() {
@@ -47,18 +45,26 @@ public class LoginController implements IController {
         String password = passwordTF.getText();
         System.out.println("Username: " + username + "\nPassword: " + password);
 
-        loginUseCase = new LoginUseCase(username, password);
+        UseCase loginUseCase = new LoginUseCase(username, password);
 
-        loginUseCase.execute(new SingleSubscriber() {
+        loginUseCase.execute(new DefaultSubscriber<User>() {
             @Override
-            public void onSuccess(Object o) {
+            public void onCompleted() {
 
             }
 
             @Override
             public void onError(Throwable throwable) {
+                // on error
+                System.out.println("Error during login");
+            }
 
+            @Override
+            public void onNext(User user) {
+                // on successful login
+                System.out.println("Successful login");
             }
         });
     }
+
 }

@@ -1,19 +1,18 @@
 package com.koala.app.client.domain.authentication;
 
 import com.koala.app.client.data.user.User;
-import com.koala.app.client.domain.Repositories;
-import com.koala.app.client.domain.SingleUseCase;
+import com.koala.app.client.data.user.UsersRepository;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
  * Version: 1.0.0
  * Creation Date: 25.11.2016.
  */
-public class LoginUseCase extends SingleUseCase {
+public class LoginUseCase extends UseCase {
+
+    private UsersRepository usersRepository = UsersRepository.getInstance();
 
     private String username, password;
 
@@ -22,14 +21,13 @@ public class LoginUseCase extends SingleUseCase {
         this.password = password;
     }
 
-
     @Override
-    protected Single buildUseCaseSingle() {
-        return Repositories.getUsersRepository().getUser(username, password).flatMap(user -> {
+    protected Observable<User> buildUseCaseObservable() {
+        return usersRepository.findByUsernameAndPassword(username, password).flatMap(user -> {
             if (user == null)
-                return Single.error(new WrongUsernameOrPasswordException());
+                return Observable.error(new WrongUsernameOrPasswordException());
 
-            return Single.just(user);
+            return Observable.just(user);
         });
     }
 

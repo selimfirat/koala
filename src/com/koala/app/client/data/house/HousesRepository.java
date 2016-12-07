@@ -1,55 +1,50 @@
 package com.koala.app.client.data.house;
 
-import rx.Single;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+import rx.Observable;
+import rx.Subscriber;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: Selim Fırat Yılmaz - mrsfy
- * Version: 1.0.0
- * Creation Date: 24.11.2016.
+ * Created by mrsfy on 03-Dec-16.
  */
-public class HousesRepository implements HousesDataSource {
+
+public class HousesRepository {
 
     private static HousesRepository _instance;
 
-    private HousesDataSource housesRemoteDataSource;
-
-    private HousesRepository( HousesDataSource housesRemoteDataSource) {
-
-        this.housesRemoteDataSource = housesRemoteDataSource;
-
-    }
-
-    public static HousesRepository getInstance(HousesRemoteDataSource housesRemoteDataSource) {
+    public static HousesRepository getInstance() {
         if (_instance == null)
-            _instance = new HousesRepository(housesRemoteDataSource);
+            _instance = new HousesRepository();
 
         return _instance;
     }
 
-    @Override
-    public Single<List<House>> getHouses() {
-        return housesRemoteDataSource.getHouses();
+    private HousesRepository(){ }
+
+    public void setJongo(Jongo jongo) {
+        this.houses = jongo.getCollection("houses");
     }
 
-    @Override
-    public Single<House> getHouseById(String houseId) {
-        return housesRemoteDataSource.getHouseById(houseId);
+
+
+    private MongoCollection houses;
+
+
+    public Observable<House> findById(String id) {
+        return Observable.just(houses.findOne(id).as(House.class));
     }
 
-    @Override
-    public Single<Void> addHouse(House house) {
-        return housesRemoteDataSource.addHouse(house);
+    public Observable<House> findBySeller(String sellerId) {
+        return Observable.from(houses.find("{seller_id: #}", sellerId).as(House.class));
     }
 
-    @Override
-    public Single<Void> updateHouse(House house) {
-        return housesRemoteDataSource.updateHouse(house);
+    public Observable<Void> save(House house) {
+        houses.save(house);
+        return Observable.empty();
     }
 
-    @Override
-    public Single<Void> deleteHouse(String houseId) {
-        return housesRemoteDataSource.deleteHouse(houseId);
-    }
 }
