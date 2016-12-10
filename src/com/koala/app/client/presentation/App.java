@@ -10,9 +10,9 @@ import com.koala.app.client.data.user.UsersRepository;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -36,7 +36,7 @@ public class App extends Application {
     public void start(Stage stage) {
         Scene mainScene = null;
         try {
-            mainScene = new Scene(FXMLLoader.load(App.class.getResource("resources/main.fxml")));
+            mainScene = new Scene((Parent) FXMLLoader.load(App.class.getResource("resources/main.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }

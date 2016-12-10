@@ -4,7 +4,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<?import com.lynden.gmapsfx.GoogleMapView?>
 <BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koala.app.client.presentation.main.MainController">
    <right>
       <VBox prefHeight="619.0" prefWidth="275.0" BorderPane.alignment="CENTER">
@@ -40,7 +39,4 @@
          </children>
       </VBox>
    </right>
-    <left>
-        <GoogleMapView fx:id="mapView"/>
-    </left>
 </BorderPane>
