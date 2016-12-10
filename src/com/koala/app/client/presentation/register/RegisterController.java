@@ -1,11 +1,14 @@
 package com.koala.app.client.presentation.register;
 
+import com.koala.app.client.presentation.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class RegisterController {
+public class RegisterController implements IController {
 
     @FXML
     private TextField passwordAgainTF;
@@ -32,7 +35,9 @@ public class RegisterController {
 
     @FXML
     void onClickCancel(ActionEvent event) {
-
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -40,4 +45,8 @@ public class RegisterController {
 
     }
 
+    @Override
+    public void init() {
+
+    }
 }

@@ -3,11 +3,14 @@ package com.koala.app.client.presentation.new_property;
 /**
  * Created by mert on 10.12.2016.
  */
+import com.koala.app.client.presentation.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class NewPropertyController {
+public class NewPropertyController implements IController{
 
     @FXML
     private TextField priceTF;
@@ -35,7 +38,9 @@ public class NewPropertyController {
 
     @FXML
     void onCancel(ActionEvent event) {
-
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -48,4 +53,8 @@ public class NewPropertyController {
 
     }
 
+    @Override
+    public void init() {
+
+    }
 }

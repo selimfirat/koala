@@ -3,11 +3,14 @@ package com.koala.app.client.presentation.upload_image;
 /**
  * Created by mert on 10.12.2016.
  */
+import com.koala.app.client.presentation.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-public class UploadImageController {
+public class UploadImageController implements IController {
 
     @FXML
     private ImageView uploaded3;
@@ -34,6 +37,13 @@ public class UploadImageController {
 
     @FXML
     void onFinish(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+    }
+
+    @Override
+    public void init() {
 
     }
 }
