@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane alignment="CENTER" animated="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="378.0" text="Register" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="RegisterController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="330.0">
+         <children>
+            <Label layoutX="39.0" layoutY="26.0" prefHeight="40.0" prefWidth="117.0" text="Username :" />
+            <Label layoutX="38.0" layoutY="94.0" text="Password :" />
+            <Label layoutX="21.0" layoutY="143.0" text="Password Again :" />
+            <Label layoutX="36.0" layoutY="204.0" text="Full Name :" />
+            <Label layoutX="46.0" layoutY="252.0" text="E-mail :" />
+            <Label layoutX="23.0" layoutY="298.0" text="Phone Number :" />
+            <TextArea fx:id="passwordTF" layoutX="109.0" layoutY="88.0" prefHeight="30.0" prefWidth="200.0" />
+            <TextField fx:id="usernameTF" layoutX="109.0" layoutY="34.0" prefHeight="30.0" prefWidth="200.0" />
+            <TextField fx:id="passwordAgainTF" layoutX="109.0" layoutY="137.0" prefHeight="30.0" prefWidth="200.0" />
+            <TextField fx:id="nameTF" layoutX="109.0" layoutY="198.0" prefHeight="30.0" prefWidth="200.0" />
+            <TextField fx:id="emailTF" layoutX="109.0" layoutY="246.0" prefHeight="30.0" prefWidth="200.0" />
+            <TextField fx:id="phoneNumberTF" layoutX="109.0" layoutY="292.0" prefHeight="30.0" prefWidth="200.0" />
+            <Button layoutX="111.0" layoutY="351.0" mnemonicParsing="false" onAction="#onClickCreate" text="Create" />
+            <Button layoutX="257.0" layoutY="351.0" mnemonicParsing="false" onAction="#onClickCancel" text="Cancel" />
+            <Label layoutX="3.0" layoutY="6.0" prefHeight="17.0" prefWidth="191.0" text="All fields should be filled" textFill="#d72d2d" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>
