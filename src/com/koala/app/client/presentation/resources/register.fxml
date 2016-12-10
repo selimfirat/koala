@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane alignment="CENTER" animated="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="378.0" text="Register" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="RegisterController">
+<TitledPane alignment="CENTER" animated="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="378.0" text="Register" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.koala.app.client.presentation.register.RegisterController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="383.0" prefWidth="330.0">
          <children>
