@@ -48,10 +48,6 @@ public class LoginController implements IController {
         UseCase loginUseCase = new LoginUseCase(username, password);
 
         loginUseCase.execute(new DefaultSubscriber<User>() {
-            @Override
-            public void onCompleted() {
-
-            }
 
             @Override
             public void onError(Throwable throwable) {

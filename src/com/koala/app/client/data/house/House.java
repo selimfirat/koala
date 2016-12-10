@@ -28,7 +28,7 @@ public class House {
         private int roomNumber;
         private String title;
         
-        public void setComments(int comments) {
+        public void setComments(String comments) {
             this.comments = comments;
         }
         
@@ -36,7 +36,7 @@ public class House {
             return comments;
         }
         
-        public void setFurnishedInfo(int furnished) {
+        public void setFurnishedInfo(boolean furnished) {
             this.furnished = furnished;
         }
         
@@ -104,7 +104,7 @@ public class House {
             this.title = title;
         }
         
-        public int getTitle() {
+        public String getTitle() {
             return title;
         }
     }
