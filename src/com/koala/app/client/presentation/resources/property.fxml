@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="613.0" text="My Own Properties" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.koala.app.client.presentation.property.PropertyController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="543.0">
+         <children>
+            <Accordion layoutX="63.0" layoutY="105.0" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>
