@@ -1,5 +1,8 @@
 package com.koala.app.client.presentation.register;
 
+import com.koala.app.client.domain.DefaultSubscriber;
+import com.koala.app.client.domain.UseCase;
+import com.koala.app.client.domain.authentication.RegisterUseCase;
 import com.koala.app.client.presentation.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +33,26 @@ public class RegisterController implements IController {
 
     @FXML
     void onClickCreate(ActionEvent event) {
+        UseCase registerUseCase = new RegisterUseCase(
+                nameTF.getText(),
+                usernameTF.getText(),
+                passwordTF.getText(),
+                phoneNumberTF.getText(),
+                emailTF.getText()
+        );
 
+        registerUseCase.execute(new DefaultSubscriber<Void>() {
+
+            @Override
+            public void onCompleted() {
+                // On success
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                // on error
+            }
+        });
     }
 
     @FXML
@@ -38,11 +60,6 @@ public class RegisterController implements IController {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    void d72d2d(ActionEvent event) {
-
     }
 
     @Override

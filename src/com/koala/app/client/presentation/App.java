@@ -36,7 +36,7 @@ public class App extends Application {
     public void start(Stage stage) {
         Scene mainScene = null;
         try {
-            mainScene = new Scene((Parent) FXMLLoader.load(App.class.getResource("resources/main.fxml")));
+            mainScene = new Scene(FXMLLoader.load(App.class.getResource("resources/main.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }

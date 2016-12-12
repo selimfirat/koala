@@ -7,6 +7,7 @@ package com.koala.app.client.data.user;
  */
 public class User {
 
+    private String id;
     private String fullName;
     private String password;
     private String email;
@@ -52,5 +53,13 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
