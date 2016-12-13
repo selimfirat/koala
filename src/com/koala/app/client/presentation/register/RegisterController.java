@@ -7,6 +7,7 @@ import com.koala.app.client.presentation.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 public class RegisterController implements IController {
 
     @FXML
-    private TextField passwordAgainTF;
+    private PasswordField passwordAgainTF;
 
     @FXML
     private TextField usernameTF;
@@ -29,7 +30,7 @@ public class RegisterController implements IController {
     private TextField phoneNumberTF;
 
     @FXML
-    private TextArea passwordTF;
+    private PasswordField passwordTF;
 
     @FXML
     void onClickCreate(ActionEvent event) {
@@ -46,11 +47,13 @@ public class RegisterController implements IController {
             @Override
             public void onCompleted() {
                 // On success
+                System.out.println("success");
             }
 
             @Override
             public void onError(Throwable throwable) {
                 // on error
+                System.out.println("error");
             }
         });
     }
