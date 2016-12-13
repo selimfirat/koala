@@ -6,7 +6,6 @@ package com.koala.app.client.data.user;
  * Creation Date: 10.11.2016.
  */
 public class User {
-
     private String id;
     private String fullName;
     private String password;

@@ -47,4 +47,9 @@ public class HousesRepository {
         return Observable.empty();
     }
 
+    public Observable<Void> removeById(String houseId) {
+        houses.remove(houseId);
+        return Observable.empty();
+    }
+
 }
