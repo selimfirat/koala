@@ -24,7 +24,7 @@ public class RegisterUseCase extends UseCase {
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
+    protected Observable<Void> buildUseCaseObservable() {
         return usersRepository.save(user);
     }
 }

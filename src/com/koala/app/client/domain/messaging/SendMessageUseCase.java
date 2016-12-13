@@ -1,8 +1,9 @@
-package com.koala.app.client.domain;
+package com.koala.app.client.domain.messaging;
 
 import com.koala.app.client.data.message.Message;
 import com.koala.app.client.data.message.MessagesRepository;
 import com.koala.app.client.data.user.User;
+import com.koala.app.client.domain.UseCase;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -14,7 +15,6 @@ import java.util.Date;
 public class SendMessageUseCase extends UseCase {
 
     private MessagesRepository messagesRepository = MessagesRepository.getInstance();
-
 
     private Message message;
 
