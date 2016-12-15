@@ -1,6 +1,7 @@
 package com.koala.app.client.data.message;
 
 import com.koala.app.client.data.user.User;
+import org.jongo.marshall.jackson.oid.MongoId;
 
 import java.util.Date;
 
@@ -9,7 +10,9 @@ import java.util.Date;
  */
 public class Message {
 
+    @MongoId
     private String id;
+
     private User to;
     private User from;
     private String message;

@@ -46,6 +46,10 @@ public class UsersRepository {
         });
     }
 
+    public boolean usernameExists(String username) {
+        return users.count("{username: #}", username) > 0;
+    }
+
     public Observable<Void> logout() {
 
         return Observable.empty();

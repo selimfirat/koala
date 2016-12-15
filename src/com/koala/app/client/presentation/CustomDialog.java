@@ -48,6 +48,7 @@ public abstract class CustomDialog extends Stage implements Initializable {
         }
         setScene(scene);
         initStyle(StageStyle.UTILITY);
+
     }
 
     @Override

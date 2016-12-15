@@ -18,6 +18,9 @@ class SaveHouseUseCase extends UseCase{
 
     @Override
     protected Observable buildUseCaseObservable() {
+
+
+
         return HousesRepository.getInstance().save(house);
     }
 }

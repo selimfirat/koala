@@ -6,8 +6,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<?import org.controlsfx.control.MaskerPane?>
+<StackPane fx:controller="com.koala.app.client.presentation.login.LoginController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 
-<BorderPane prefHeight="242.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koala.app.client.presentation.login.LoginController">
+<BorderPane prefHeight="242.0" prefWidth="433.0">
    <center>
       <GridPane hgap="15.0" prefHeight="107.0" prefWidth="433.0" vgap="5.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -48,3 +50,5 @@
       </HBox>
    </bottom>
 </BorderPane>
+   <MaskerPane visible="false" fx:id="maskerPane" text="Logging in..."/>
+</StackPane>

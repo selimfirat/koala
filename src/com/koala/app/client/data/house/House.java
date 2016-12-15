@@ -1,6 +1,7 @@
 package com.koala.app.client.data.house;
 
 import com.koala.app.client.data.user.User;
+import org.jongo.marshall.jackson.oid.MongoId;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -10,7 +11,9 @@ import com.koala.app.client.data.user.User;
 public class House {
 
 
+    @MongoId
     private final String id;
+
     private User seller;
     private House.Types houseType;
     private Location location;
