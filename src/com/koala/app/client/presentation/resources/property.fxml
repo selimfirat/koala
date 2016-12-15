@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="613.0" text="My Own Properties" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koala.app.client.presentation.property.PropertyController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="611.0">
+         <children>
+            <Accordion layoutX="63.0" layoutY="105.0" />
+            <ImageView fx:id="image1" fitHeight="90.0" fitWidth="90.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="528.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickDelete1" text="Delete" />
+            <Button layoutX="535.0" layoutY="50.0" mnemonicParsing="false" onAction="#onClickEdit1" text="Edit" />
+            <Label fx:id="nameLabel1" layoutX="237.0" layoutY="14.0" text="Name of the House">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="idLabel1" layoutX="269.0" layoutY="41.0" text="ID Number">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="priceLabel1" layoutX="293.0" layoutY="79.0" text="Price" />
+            <ImageView fx:id="image2" fitHeight="90.0" fitWidth="90.0" layoutX="6.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image3" fitHeight="90.0" fitWidth="90.0" layoutX="6.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="nameLabel2" layoutX="237.0" layoutY="124.0" text="Name of the House">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="idLabel2" layoutX="269.0" layoutY="153.0" text="ID Number">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="priceLabel2" layoutX="293.0" layoutY="189.0" text="Price" />
+            <Button layoutX="528.0" layoutY="124.0" mnemonicParsing="false" onAction="#onClickDelete2" text="Delete" />
+            <Button layoutX="535.0" layoutY="162.0" mnemonicParsing="false" onAction="#onClickEdit2" text="Edit" />
+            <Label fx:id="priceLabel3" layoutX="293.0" layoutY="304.0" text="Price" />
+            <Label fx:id="idLabel3" layoutX="269.0" layoutY="266.0" text="ID Number">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameLabel3" layoutX="237.0" layoutY="231.0" text="Name of the House">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="528.0" layoutY="231.0" mnemonicParsing="false" onAction="#onClickDelete3" text="Delete" />
+            <Button layoutX="535.0" layoutY="264.0" mnemonicParsing="false" onAction="#onClickEdit3" text="Edit" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>
