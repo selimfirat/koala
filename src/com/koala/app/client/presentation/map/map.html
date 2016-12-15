@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        html { height: 100% }
+        body { height: 100%; margin: 0; padding: 0 }
+        #map_canvas { height: 100% }
+        .button {
+        padding: 5px 15px;
+        font-size: 20px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 3px #999;
+        }
+
+        .button:hover {background-color: #3e8e41}
+
+        .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 2px #666;
+        transform: translateY(2px);
+        }
+
+        .buttonContainer {
+        width: 170;
+        margin-right: 1px;
+        margin-left: auto;
+        float: right;
+        }
+
+        .titleContainer {
+        width: 170;
+        margin-right: auto;
+        margin-left: 1;
+        float: left;
+        }
+
+        .moreInfo {
+        width: 160;
+        margin-right: auto;
+        margin-left: auto;
+        padding-top:1px;
+        }
+    </style>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxxOrGlGLBRGeomq6cZrsaR5TvH7zpnMA&sensor;=false">
+    </script>
+    <script type="text/javascript">
+        var map;
+        var marker1;
+        var markers = [];
+
+        function get_click_position(event){
+            var location = event.latLng;
+            var lat = location.lat();
+            var lng = location.lng();
+            setMarkerPosition(lat, lng);
+            app.handle(lat, lng);
+        }
+
+        function setMarkerPosition(lat, lng) {
+            var clickLatLng = new google.maps.LatLng(lat, lng);
+            marker.setPosition(clickLatLng);
+            map.panTo( clickLatLng);
+        }
+
+        function startJumping(){
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+
+        function stopJumping(){
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+
+        function setMapCenter(lat, lng) {
+            var latlng = new google.maps.LatLng(lat, lng);
+            map.setCenter(latlng);
+        }
+
+        function switchSatellite() {
+            var mapOptions = {
+                mapTypeId: google.maps.MapTypeId.SATELLITE
+            };
+            map.setOptions(mapOptions);
+            setLightMarkerIcon();
+        }
+
+        function switchRoadmap() {
+            var mapOptions = {
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map.setOptions(mapOptions);
+            setDarkMarkerIcon();
+        }
+
+        function switchHybrid() {
+            var mapOptions = {
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            };
+            map.setOptions(mapOptions);
+            setLightMarkerIcon();
+        }
+
+        function switchTerrain() {
+            var mapOptions = {
+                mapTypeId: google.maps.MapTypeId.TERRAIN
+            };
+            map.setOptions(mapOptions);
+            setDarkMarkerIcon();
+        }
+
+        function createMarker(id, title, context, imageLocation, lat, lng){
+            var marker = new Object();
+            marker.id = id;
+            marker.title = title;
+            marker.context = context;
+            marker.imageLocation = imageLocation;
+            marker.lat = lat;
+            marker.lng = lng;
+            marker.marker = new google.maps.Marker({
+              map: map,
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              position: new google.maps.LatLng(lat, lng)
+            });
+            var contentString = '<div id="content">'+
+                                  '<div id="siteNotice">'+
+                                  '</div>'+
+                                  '<div class="titleContainer"><h1>Title</h1></div>'+
+                                  '<br>'+
+                                  '<div class="buttonContainer"><button class="button">2 500 000$</button></div>'+
+                                  '<br>'+
+                                  '<br>'+
+                                  '<br>'+
+                                  '<div id="bodyContent">'+
+                                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large sandstone rock formation in the southern part of the Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) south west of the nearest large town, Alice Springs; 450&#160;km (280&#160;mi) by road. Kata Tjuta and Uluru are the two major features of the Uluru - Kata Tjuta National Park. Uluru is sacred to the Pitjantjatjara and Yankunytjatjara, the Aboriginal people of the area. It has many springs, waterholes, rock caves and ancient paintings. Uluru is listed as a WorldHeritage Site.</p>'+
+                                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194"> https://en.wikipedia.org/w/index.php?title=Uluru</a> (last visited June 22, 2009).</p>'+
+                                  '</div>'+
+                                '<div class="moreInfo"><button class="button">More Info</button></div>'+
+                                 '</div>';
+            marker.infowindow = new google.maps.InfoWindow({
+              content: contentString
+            });
+            marker.marker.addListener('click', function() {
+              marker.infowindow.open(map, marker.marker);
+            });
+            markers.push(marker);
+        }
+
+        function removeMarker(id){
+            for (index = 0, len = markers.length; index < len; ++index) {
+                if(markers[index].id == id){
+                    markers[index].marker.setMap(null);
+                    markers.splice(index, 1);
+                }
+            }
+        }
+
+        function initialize() {
+            var defLatLng = new google.maps.LatLng(59.95632093391832, 30.309906005859375);
+            var mapOptions = {
+                center: defLatLng,
+                zoom: 3,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                disableDefaultUI: true,
+                panControl: false
+            };
+            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+            google.maps.event.addListener(map, 'click', get_click_position);
+
+            marker1 = new google.maps.Marker({
+                position: defLatLng,
+                map: map,
+                draggable: true
+            });
+
+            app.handle(0, 0);
+        }
+
+        function setDarkMarkerIcon() {
+            //marker.setIcon("img/Pin.png");
+        }
+
+        function setLightMarkerIcon() {
+            //marker.setIcon("img/Pin_s.png");
+        }
+
+
+    </script>
+</head>
+<body onload="initialize()">
+<div id="map_canvas" style="width:100%; height:100%"></div>
+</body>
+</html>
