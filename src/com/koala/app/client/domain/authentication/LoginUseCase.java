@@ -1,5 +1,6 @@
 package com.koala.app.client.domain.authentication;
 
+import com.koala.app.client.data.user.Identity;
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.data.user.UsersRepository;
 import com.koala.app.client.domain.UseCase;
@@ -26,6 +27,8 @@ public class LoginUseCase extends UseCase {
         return usersRepository.findByUsernameAndPassword(username, password).flatMap(user -> {
             if (user == null)
                 return Observable.error(new WrongUsernameOrPasswordException());
+
+            Identity.setCurrentUser(user);
 
             return Observable.just(user);
         });

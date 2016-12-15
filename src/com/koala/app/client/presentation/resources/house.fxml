@@ -78,7 +78,7 @@
                   <TextField fx:id="bathTF" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                </children>
             </GridPane>
-            <Label fx:id="nameLabel" layoutX="257.0" layoutY="349.0" text="Name of the seller :" />
+            <Label fx:id="sellerNameLabel" layoutX="257.0" layoutY="349.0" text="Name of the seller :" />
             <TextField fx:id="nameTF" layoutX="410.0" layoutY="345.0" prefHeight="25.0" prefWidth="134.0" />
             <TextArea fx:id="commentsTF" layoutX="-6.0" layoutY="451.0" prefHeight="126.0" prefWidth="634.0" />
             <Label fx:id="commentLabel" layoutX="8.0" layoutY="433.0" text="Comments : " />

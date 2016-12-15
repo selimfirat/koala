@@ -46,5 +46,10 @@ public class UsersRepository {
         });
     }
 
+    public Observable<Void> logout() {
+
+        return Observable.empty();
+    }
+
 
 }

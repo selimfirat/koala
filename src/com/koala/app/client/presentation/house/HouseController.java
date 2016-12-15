@@ -16,6 +16,8 @@ public class HouseController {
 
     @FXML
     private TextField nameTF;
+    @FXML
+    private TextField sellerName;
 
     @FXML
     private Label commentLabel;
