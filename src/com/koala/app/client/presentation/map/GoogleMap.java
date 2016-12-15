@@ -40,10 +40,10 @@ public class GoogleMap extends Parent {
         webView.setMinSize(screen.getBounds().getWidth()-275,screen.getBounds().getHeight());
         getChildren().add(webView); // Will be change as JavaFx Elements change
         setMapCenter(0, 0);
-        switchTerrain();
+        //switchTerrain();
+        switchRoadmap();
         markers = new ArrayList<Marker>();
-        markers.add(new Marker());
-        addMarker(markers.get(0));
+        addMarker(new Marker());
         //removeMarker(markers.get(0));
     }
 
@@ -138,6 +138,7 @@ public class GoogleMap extends Parent {
     }
 
     public void addMarker(Marker marker){
+        markers.add(marker);
         invokeJS("createMarker(" + Integer.toString(marker.getId())+ ", \"" + marker.getTitle() + "\", \"" + marker.getContext() + "\", \"" + marker.getImageLocation() + "\", "
                 + Double.toString(marker.getLat()) + ", " + Double.toString(marker.getLng()) + ")");
     }

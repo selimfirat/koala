@@ -40,5 +40,5 @@
          </children>
       </VBox>
    </right>
-    <left><GoogleMap></GoogleMap></left>
+    <left><GoogleMap fx:id="Gmap"></GoogleMap></left>
 </BorderPane>

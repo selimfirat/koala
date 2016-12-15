@@ -3,6 +3,7 @@ package com.koala.app.client.presentation.new_property;
 /**
  * Created by mert on 10.12.2016.
  */
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
