@@ -24,16 +24,26 @@ public class House {
 
     private class HouseFeatures {
         private String comments;
-        private boolean furnished;
+        //private int currentFloor;
+        //private int totalFloor;
         private int bathroomNumber;
-        private int currentFloor;
-        private int totalFloor;
+        private boolean furnished;
         private int price;
-        private int ageOfBuilding;
         private int size;
+        private int ageOfBuilding;
         private int roomNumber;
-
         private String title;
+        
+        public HouseFeatures(String title, int roomNumber, int ageOfBuilding, int size, int price, boolean furnished, int bathroomNumber, String comments) {
+            this.title = title;
+            this.roomNumber = roomNumber;
+            this.ageOfBuilding = ageOfBuilding;
+            this.size = size;
+            this.price = price;
+            this.furnished = furnished;
+            this.bathroomNumber = bathroomNumber;
+            this.comments = comments;
+        }
 
         public void setComments(String comments) {
             this.comments = comments;
@@ -59,6 +69,7 @@ public class House {
             return bathroomNumber;
         }
 
+        /*
         public void setCurrentFloor(int currentFloor) {
             this.currentFloor = currentFloor;
         }
@@ -74,7 +85,8 @@ public class House {
         public int getTotalFloor() {
             return totalFloor;
         }
-
+        */
+        
         public void setPrice(int price) {
             this.price = price;
         }

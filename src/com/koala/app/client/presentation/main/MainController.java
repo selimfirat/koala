@@ -43,7 +43,8 @@ public class MainController implements IController, Initializable {
 
     @Override
     public void init() {
-
+        //new houses to be added, approximately 5
+        House house1 = new House("firstHouseID", new User(), FOR_SALE, new houseFeatures());
     }
 
     @Override

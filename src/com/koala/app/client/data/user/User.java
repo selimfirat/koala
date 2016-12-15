@@ -13,7 +13,15 @@ public class User {
     private String username;
     private String phoneNumber;
 
-
+    public User(String id, String fullName, String password, String email, String username, String phoneNumber) {
+        this.id = id;
+        this.fullName = fullName;
+        this.password = password;
+        this.email = email;
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+    }
+    
     public String getFullName() {
         return fullName;
     }
