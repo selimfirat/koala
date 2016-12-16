@@ -1,7 +1,5 @@
 package com.koala.app.client.presentation.main;
 
-import com.koala.app.client.data.house.House;
-import com.koala.app.client.data.user.User;
 import com.koala.app.client.presentation.IController;
 import com.koala.app.client.presentation.login.LoginDialog;
 import com.koala.app.client.presentation.map.GoogleMap;
@@ -11,13 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
-
-import static com.koala.app.client.data.house.House.Types.FOR_SALE;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -33,17 +30,8 @@ public class MainController implements IController, Initializable {
     private BorderPane rootBorderPane;
 
     @FXML
-    public void openLoginDialog(ActionEvent event) {
-        new LoginDialog().show();
-    }
+    private GoogleMap Gmap;
 
-    @FXML
-    public void openRegisterDialog(ActionEvent event) {
-        new RegisterDialog().show();
-    }
-
-    @FXML
-    public GoogleMap Gmap;
 
     @Override
     public void init() {
@@ -53,7 +41,12 @@ public class MainController implements IController, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("It is working.");
+        ToolBar menuBar = TopBarFactory.createToolBar();
+
+        rootBorderPane.setTop(menuBar);
+
+
+
         Gmap.setMapCenter(39.876870, 32.747808);
         Gmap.addMarker(new Marker(39.876870,32.747808));
     }

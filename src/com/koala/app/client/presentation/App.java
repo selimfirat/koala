@@ -53,8 +53,7 @@ public class App extends Application {
         stage.setScene(mainScene);
         stage.show();
 
-
+        new NewPropertyDialog().show();
     }
-
 
 }

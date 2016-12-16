@@ -35,7 +35,6 @@ public class UsersRepository {
     }
 
     public Observable<User> findByUsernameAndPassword(String username, String password) {
-        System.out.println(username + " : " + password);
         return Observable.just(users.findOne("{username: #, password: #}", username, password).as(User.class));
     }
 

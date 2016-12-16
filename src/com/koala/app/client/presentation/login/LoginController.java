@@ -5,6 +5,7 @@ import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.authentication.LoginUseCase;
 import com.koala.app.client.presentation.IController;
+import com.koala.app.client.presentation.util.StageUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -40,9 +41,7 @@ public class LoginController implements IController {
 
     @FXML
     public void onClickCancel(ActionEvent event) {
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
+        StageUtils.closeStage(event);
     }
 
     @FXML

@@ -6,16 +6,10 @@
 
 <?import com.koala.app.client.presentation.map.GoogleMap?>
 <BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.koala.app.client.presentation.main.MainController">
-   <right>
+
+    <right>
       <VBox prefHeight="619.0" prefWidth="275.0" BorderPane.alignment="CENTER">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                  <Button mnemonicParsing="false" onAction="#openLoginDialog" text="Login" />
-                  <HBox HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#openRegisterDialog" text="Register" />
-              </items>
-            </ToolBar>
             <Accordion fx:id="importantsAccordion">
               <panes>
                 <TitledPane animated="true" text="untitled 1">
