@@ -1,4 +1,4 @@
-package com.koala.app.client.presentation.util;
+package com.koala.app.client.domain.authentication;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

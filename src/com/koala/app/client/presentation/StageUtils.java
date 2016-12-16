@@ -1,4 +1,4 @@
-package com.koala.app.client.presentation.util;
+package com.koala.app.client.presentation;
 
 import com.koala.app.client.presentation.main.BottomBar;
 import javafx.event.ActionEvent;

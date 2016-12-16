@@ -1,6 +1,6 @@
 package com.koala.app.client.presentation.main;
 
-import com.koala.app.client.presentation.util.StageUtils;
+import com.koala.app.client.presentation.StageUtils;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
