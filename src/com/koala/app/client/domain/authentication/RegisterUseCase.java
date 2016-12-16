@@ -3,6 +3,7 @@ package com.koala.app.client.domain.authentication;
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.data.user.UsersRepository;
 import com.koala.app.client.domain.UseCase;
+import com.koala.app.client.presentation.util.Encryption;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -46,6 +47,9 @@ public class RegisterUseCase extends UseCase {
 
         if (vex != null)
             return Observable.error(vex);
+
+
+        user.setPassword(Encryption.getMD5(user.getPassword()));
 
         return usersRepository.save(user);
     }

@@ -4,6 +4,7 @@ import com.koala.app.client.data.user.Identity;
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.data.user.UsersRepository;
 import com.koala.app.client.domain.UseCase;
+import com.koala.app.client.presentation.util.Encryption;
 import rx.Observable;
 
 /**
@@ -19,7 +20,7 @@ public class LoginUseCase extends UseCase {
 
     public LoginUseCase(String username, String password) {
         this.username = username;
-        this.password = password;
+        this.password = Encryption.getMD5(password);
     }
 
     @Override
