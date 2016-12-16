@@ -52,8 +52,6 @@ public class App extends Application {
         stage.setHeight(bounds.getHeight());
         stage.setScene(mainScene);
         stage.show();
-
-        new NewPropertyDialog().show();
     }
 
 }

@@ -10,6 +10,9 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class UploadImageController implements IController {
 
     @FXML
@@ -43,7 +46,7 @@ public class UploadImageController implements IController {
     }
 
     @Override
-    public void init() {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 }

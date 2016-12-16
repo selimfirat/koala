@@ -37,7 +37,7 @@ public class GoogleMap extends Parent {
         initMap();
         initCommunication();
         Screen screen = Screen.getPrimary();
-        webView.setMinSize(screen.getBounds().getWidth()-275,screen.getBounds().getHeight());
+        webView.setPrefSize(screen.getBounds().getWidth(),screen.getBounds().getHeight() - 100);
         getChildren().add(webView); // Will be change as JavaFx Elements change
         setMapCenter(0, 0);
         //switchTerrain();

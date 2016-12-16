@@ -4,17 +4,16 @@ import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.authentication.RegisterUseCase;
 import com.koala.app.client.presentation.IController;
+import com.koala.app.client.presentation.util.Progress;
 import com.koala.app.client.presentation.util.StageUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.controlsfx.control.MaskerPane;
 import org.controlsfx.control.Notifications;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class RegisterController implements IController {
 
@@ -36,12 +35,10 @@ public class RegisterController implements IController {
     @FXML
     private PasswordField passwordTF;
 
-    @FXML
-    private MaskerPane maskerPane;
 
     @FXML
     void onClickCreate(ActionEvent event) {
-        maskerPane.setVisible(true);
+        Progress.start("Creating account...");
         UseCase registerUseCase = new RegisterUseCase(
                 nameTF.getText(),
                 usernameTF.getText(),
@@ -56,7 +53,7 @@ public class RegisterController implements IController {
             @Override
             public void onCompleted() {
                 // On success
-                maskerPane.setVisible(false);
+                Progress.end();
                 Notifications.create()
                         .title("Success")
                         .text("Account created successfully!")
@@ -67,7 +64,7 @@ public class RegisterController implements IController {
             @Override
             public void onError(Throwable throwable) {
                 // on error
-                maskerPane.setVisible(false);
+                Progress.end();
 
                 Notifications.create()
                         .title("Error during registration")
@@ -83,7 +80,7 @@ public class RegisterController implements IController {
     }
 
     @Override
-    public void init() {
-
+    public void initialize(URL location, ResourceBundle resources) {
+        usernameTF.requestFocus();
     }
 }

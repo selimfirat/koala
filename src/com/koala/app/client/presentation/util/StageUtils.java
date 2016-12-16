@@ -1,7 +1,10 @@
 package com.koala.app.client.presentation.util;
 
+import com.koala.app.client.presentation.main.BottomBar;
 import javafx.event.ActionEvent;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -14,4 +17,22 @@ public class StageUtils {
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
     }
+
+    private static Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+
+    public static double getStageWidth() {
+        return screenBounds.getWidth();
+    }
+    public static double getStageHeight() {
+        return screenBounds.getHeight();
+    }
+
+    public static double getStageMinX() {
+        return screenBounds.getMinY();
+    }
+    public static double getStageMinY() {
+        return screenBounds.getMinY();
+    }
+
 }

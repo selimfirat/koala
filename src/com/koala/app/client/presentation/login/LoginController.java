@@ -5,18 +5,16 @@ import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.authentication.LoginUseCase;
 import com.koala.app.client.presentation.IController;
+import com.koala.app.client.presentation.util.Progress;
 import com.koala.app.client.presentation.util.StageUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-import org.controlsfx.control.MaskerPane;
 import org.controlsfx.control.Notifications;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -25,19 +23,16 @@ import org.controlsfx.control.Notifications;
  */
 public class LoginController implements IController {
 
-    @FXML
-    private MaskerPane maskerPane;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        usernameTF.requestFocus();
+    }
 
     @FXML
     private TextField usernameTF;
 
     @FXML
     private PasswordField passwordTF;
-
-    @Override
-    public void init() {
-        usernameTF.requestFocus();
-    }
 
     @FXML
     public void onClickCancel(ActionEvent event) {
@@ -46,7 +41,8 @@ public class LoginController implements IController {
 
     @FXML
     public void onClickLogin(ActionEvent event) {
-        maskerPane.setVisible(true);
+        Progress.start("Logging in...");
+
 
         String username = usernameTF.getText();
         String password = passwordTF.getText();
@@ -59,7 +55,7 @@ public class LoginController implements IController {
             @Override
             public void onError(Throwable throwable) {
                 // on error
-                maskerPane.setVisible(false);
+                Progress.end();
 
                 Notifications.create()
                         .title("Error during login")
@@ -75,7 +71,7 @@ public class LoginController implements IController {
 
             @Override
             public void onCompleted() {
-                maskerPane.setVisible(false);
+                Progress.end();
                 onClickCancel(event);
             }
         });
