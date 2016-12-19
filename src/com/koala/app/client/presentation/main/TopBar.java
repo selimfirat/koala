@@ -1,10 +1,16 @@
 package com.koala.app.client.presentation.main;
 
+import com.koala.app.client.EventBus;
+import com.koala.app.client.EventType;
 import com.koala.app.client.data.user.Identity;
+import com.koala.app.client.domain.DefaultSubscriber;
+import com.koala.app.client.domain.authentication.LogoutUseCase;
 import com.koala.app.client.presentation.login.LoginDialog;
 import com.koala.app.client.presentation.message.MessageDialog;
+import com.koala.app.client.presentation.new_property.NewPropertyDialog;
 import com.koala.app.client.presentation.register.RegisterDialog;
 import com.koala.app.client.presentation.StageUtils;
+import javafx.event.ActionEvent;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ToolBar;
@@ -24,7 +30,6 @@ import static org.controlsfx.control.action.ActionUtils.ACTION_SPAN;
  */
 public class TopBar extends Parent {
 
-
     private Collection<? extends Action> noAuthActions() {
         return Arrays.asList(
                 new ActionGroup("   File   ", new Action("Exit", StageUtils::closeStage)), // TODO: currently has a bug
@@ -35,21 +40,33 @@ public class TopBar extends Parent {
                 new Action("Register", e -> new RegisterDialog().showAndWait())
         );
     }
+
     private Collection<? extends Action> authActions() {
         return Arrays.asList(
                 new ActionGroup("   File   ", new Action("Exit", StageUtils::closeStage)), // TODO: currently has a bug
-                ACTION_SEPARATOR,
                 ACTION_SPAN,
-                new Action("Sell House", e -> new LoginDialog().showAndWait()),
+                new Action("Sell House", e -> EventBus.trigger(EventType.SELL_HOUSE_CLICKED)),
                 ACTION_SEPARATOR,
-                new Action("Favorites", e -> new RegisterDialog().showAndWait()),
+                new Action("Favorites", e -> EventBus.trigger(EventType.FAVORITES_CLICKED)),
                 ACTION_SEPARATOR,
-                new Action("Messages", e -> new MessageDialog().showAndWait())
+                new Action("Messages", e -> EventBus.trigger(EventType.MESSAGES_CLICKED)),
+                ACTION_SEPARATOR,
+                new Action("Logout", e -> new LogoutUseCase().execute(new DefaultSubscriber()))
         );
     }
 
-
     public TopBar() {
+        setToolbar();
+
+        EventBus.toObservable(EventType.AUTH).subscribe(new DefaultSubscriber<Object>() {
+            @Override
+            public void onNext(Object o) {
+                setToolbar();
+            }
+        });
+    }
+
+    private void setToolbar() {
         ToolBar toolBar =  ActionUtils.createToolBar(
                 Identity.isAuthenticated() ? authActions() : noAuthActions(),
                 ActionUtils.ActionTextBehavior.SHOW
@@ -60,7 +77,7 @@ public class TopBar extends Parent {
         toolBar.setPrefWidth(bounds.getWidth());
         toolBar.setPrefHeight(30);
 
-
+        getChildren().removeAll();
         getChildren().add(toolBar);
     }
 

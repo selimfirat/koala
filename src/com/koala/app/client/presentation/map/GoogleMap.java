@@ -4,7 +4,9 @@ package com.koala.app.client.presentation.map;
  * Created by Burak Erkilic on 12.12.2016.
  */
 
-import javafx.beans.property.ReadOnlyDoubleProperty;
+import com.koala.app.client.EventBus;
+import com.koala.app.client.EventType;
+import com.koala.app.client.data.house.Location;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -15,17 +17,15 @@ import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import netscape.javascript.JSObject;
 
-import java.util.ArrayList;
-
 public class GoogleMap extends Parent {
 
     //####################### Instance variables #######################
     private JSObject doc;
-    private EventHandler<MapEvent> onMapLatLngChanged;
+    private EventHandler<MapBoundsChangedEvent> onMapBoundsChanged;
     private WebView webView;
     private WebEngine webEngine;
     private boolean ready;
-    private ArrayList<Marker> markers;
+
     //####################################################################
 
     /**
@@ -39,12 +39,11 @@ public class GoogleMap extends Parent {
         Screen screen = Screen.getPrimary();
         webView.setPrefSize(screen.getBounds().getWidth(),screen.getBounds().getHeight() - 100);
         getChildren().add(webView); // Will be change as JavaFx Elements change
-        setMapCenter(0, 0);
-        //switchTerrain();
-        switchRoadmap();
-        markers = new ArrayList<Marker>();
-        addMarker(new Marker());
-        //removeMarker(markers.get(0));
+
+        setOnMapBoundsChanged(event -> {
+            System.out.println(event);
+        });
+
     }
 
     /**
@@ -58,7 +57,7 @@ public class GoogleMap extends Parent {
         //####################### Initialize Web View #######################
         webView = new WebView();
         webEngine = webView.getEngine();
-        webEngine.load(getClass().getResource("map.html").toExternalForm());
+        webEngine.load(getClass().getResource("web/map.html").toExternalForm());
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>()
         {
             @Override
@@ -126,33 +125,22 @@ public class GoogleMap extends Parent {
         }
     }
 
-    public void setOnMapLatLngChanged(EventHandler<MapEvent> eventHandler) {
-        onMapLatLngChanged = eventHandler;
+    public void setOnMapBoundsChanged(EventHandler<MapBoundsChangedEvent> eventHandler) {
+        onMapBoundsChanged = eventHandler;
     }
 
-    public void handle(double lat, double lng) {
-        if(onMapLatLngChanged != null) {
-            MapEvent event = new MapEvent(this, lat, lng);
-            onMapLatLngChanged.handle(event);
+    public void handle(double swLat, double swLng, double neLat, double neLng, double centerLat, double centerLong) {
+        if(onMapBoundsChanged != null) {
+            Location sw = new Location(swLat, swLng);
+            Location ne = new Location(neLat, neLng);
+            Location center = new Location(centerLat, centerLong);
+            MapBoundsChangedEvent event = new MapBoundsChangedEvent(this, center, ne, sw);
+            onMapBoundsChanged.handle(event);
         }
     }
 
-    public void addMarker(Marker marker){
-        markers.add(marker);
-        invokeJS("createMarker(" + Integer.toString(marker.getId())+ ", \"" + marker.getTitle() + "\", \"" + marker.getContext() + "\", \"" + marker.getImageLocation() + "\", "
-                + Double.toString(marker.getLat()) + ", " + Double.toString(marker.getLng()) + ")");
-    }
-
-    public void removeMarker(Marker marker){
-        markers.remove(marker);
-        invokeJS("removeMarker(" + marker.getId()+")");
-    }
-
-    public void setMarkerPosition(Marker marker, double lat, double lng) {
-        marker.setLocation(lat,lng);
-        String sLat = Double.toString(lat);
-        String sLng = Double.toString(lng);
-        invokeJS("setMarkerPosition(" + marker.getId()+ ", " + sLat + ", " + sLng + ");");
+    public void handleSellHouseLocation(double lat, double lng) {
+        EventBus.trigger(EventType.SELL_HOUSE_LOCATION_SELECTED, new MapClickEvent(this, lat, lng));
     }
 
     public void setMapCenter(double lat, double lng) {
@@ -161,40 +149,7 @@ public class GoogleMap extends Parent {
         invokeJS("setMapCenter(" + sLat + ", " + sLng + ");");
     }
 
-    public void switchSatellite() {
-        invokeJS("switchSatellite()");
+    public void initSellHouseProcess() {
+        invokeJS("initSellHouseProcess()");
     }
-
-    public void switchRoadmap() {
-        invokeJS("switchRoadmap()");
-    }
-
-    public void switchHybrid() {
-        invokeJS("switchHybrid()");
-    }
-
-    public void switchTerrain() {
-        invokeJS("switchTerrain()");
-    }
-
-    public void startJumping() {
-        invokeJS("startJumping()");
-    }
-
-    public void stopJumping() {
-        invokeJS("stopJumping()");
-    }
-
-    public void setHeight(double h) {
-        webView.setPrefHeight(h);
-    }
-
-    public void setWidth(double w) {
-        webView.setPrefWidth(w);
-    }
-
-    public ReadOnlyDoubleProperty widthProperty() {
-        return webView.widthProperty();
-    }
-
 }

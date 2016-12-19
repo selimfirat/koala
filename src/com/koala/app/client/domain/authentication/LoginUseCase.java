@@ -1,5 +1,7 @@
 package com.koala.app.client.domain.authentication;
 
+import com.koala.app.client.EventBus;
+import com.koala.app.client.EventType;
 import com.koala.app.client.data.user.Identity;
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.data.user.UsersRepository;
@@ -29,6 +31,7 @@ public class LoginUseCase extends UseCase {
                 return Observable.error(new WrongUsernameOrPasswordException());
 
             Identity.setCurrentUser(user);
+            EventBus.trigger(EventType.AUTH);
 
             return Observable.just(user);
         });
