@@ -12,7 +12,7 @@ public class House {
 
 
     @MongoId
-    private final String id;
+    private String id;
 
     private User seller;
     private House.Types houseType;
@@ -25,16 +25,53 @@ public class House {
 
     }
 
-    private class HouseFeatures {
+    public static class HouseFeatures {
         private String comments;
-        //private int currentFloor;
-        //private int totalFloor;
+
+        public int getCurrentFloor() {
+            return currentFloor;
+        }
+
+        public void setCurrentFloor(int currentFloor) {
+            this.currentFloor = currentFloor;
+        }
+
+        public int getTotalFloor() {
+            return totalFloor;
+        }
+
+        public void setTotalFloor(int totalFloor) {
+            this.totalFloor = totalFloor;
+        }
+
+        public boolean isFurnished() {
+            return furnished;
+        }
+
+        public void setFurnished(boolean furnished) {
+            this.furnished = furnished;
+        }
+
+        public int getAgeOfBuilding() {
+            return ageOfBuilding;
+        }
+
+        public void setAgeOfBuilding(int ageOfBuilding) {
+            this.ageOfBuilding = ageOfBuilding;
+        }
+
+        private int currentFloor;
+        private int totalFloor;
         private int bathroomNumber;
         private boolean furnished;
         private int price;
         private int size;
         private int ageOfBuilding;
         private int roomNumber;
+
+        public HouseFeatures() {
+        }
+
         private String title;
         
         public HouseFeatures(String title, int roomNumber, int ageOfBuilding, int size, int price, boolean furnished, int bathroomNumber, String comments) {
@@ -130,6 +167,9 @@ public class House {
         }
 
 
+    }
+
+    public House() {
     }
 
     public House(String id, User seller, Types houseType, HouseFeatures houseFeatures){

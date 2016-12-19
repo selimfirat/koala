@@ -41,7 +41,7 @@ public class GoogleMap extends Parent {
         getChildren().add(webView); // Will be change as JavaFx Elements change
 
         setOnMapBoundsChanged(event -> {
-            System.out.println(event);
+            EventBus.trigger(EventType.MAP_BOUNDS_CHANGED, event);
         });
 
     }

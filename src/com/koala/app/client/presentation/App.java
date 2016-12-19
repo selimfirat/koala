@@ -7,7 +7,6 @@ package com.koala.app.client.presentation;
 
 import com.koala.app.client.data.house.HousesRepository;
 import com.koala.app.client.data.user.UsersRepository;
-import com.koala.app.client.presentation.new_property.NewPropertyDialog;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import javafx.application.Application;
@@ -44,6 +43,9 @@ public class App extends Application {
 
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
+
+
+        StageUtils.setMainStage(stage);
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setX(bounds.getMinX());

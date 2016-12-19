@@ -3,13 +3,20 @@ package com.koala.app.client.presentation.main;
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
 import com.koala.app.client.domain.DefaultSubscriber;
+import com.koala.app.client.domain.UseCase;
+import com.koala.app.client.domain.houses.AddHouseUseCase;
 import com.koala.app.client.presentation.IController;
+import com.koala.app.client.presentation.StageUtils;
 import com.koala.app.client.presentation.map.GoogleMap;
-import com.koala.app.client.presentation.new_property.NewPropertyDialog;
+import com.koala.app.client.presentation.map.MapClickEvent;
+import com.koala.app.client.presentation.sell_house.SellHouseDialog;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -40,13 +47,40 @@ public class MainController implements IController {
             }
         });
 
-        EventBus.toObservable(EventType.SELL_HOUSE_LOCATION_SELECTED).subscribe(new DefaultSubscriber<Object>(){
-            @Override
-            public void onNext(Object o) {
-                new NewPropertyDialog().showAndWait();
-            }
-        });
+
+        EventBus.toObservable(EventType.SELL_HOUSE_LOCATION_SELECTED).subscribe(sellHouseSubscriber());
 
         // Gmap.addMarker(new Marker(39.876870,32.747808));
+    }
+
+    private DefaultSubscriber<Object> sellHouseSubscriber() {
+        return new DefaultSubscriber<Object>(){
+            @Override
+            public void onNext(Object o) {
+                MapClickEvent location = (MapClickEvent) o;
+                SellHouseDialog sellHouseDialog = new SellHouseDialog(StageUtils.getMainStage());
+                sellHouseDialog.showAndWait().ifPresent(new Consumer<ButtonType>() {
+                    @Override
+                    public void accept(ButtonType buttonType) {
+                        if (buttonType == ButtonType.FINISH) {
+                            Map<Object, Object> p = sellHouseDialog.getProperties();
+                            p.put("lat", location.getLat());
+                            p.put("lng", location.getLng());
+
+                            UseCase sellHouseUseCase = new AddHouseUseCase(p);
+
+                            sellHouseUseCase.execute(new DefaultSubscriber<Void>() {
+                                @Override
+                                public void onCompleted() {
+                                    System.out.println("oley be");
+                                }
+                            });
+
+
+                        }
+                    }
+                });
+            }
+        };
     }
 }

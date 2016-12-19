@@ -11,10 +11,14 @@ import com.koala.app.client.presentation.new_property.NewPropertyDialog;
 import com.koala.app.client.presentation.register.RegisterDialog;
 import com.koala.app.client.presentation.StageUtils;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.control.action.ActionGroup;
 import org.controlsfx.control.action.ActionUtils;
@@ -29,6 +33,8 @@ import static org.controlsfx.control.action.ActionUtils.ACTION_SPAN;
  * Created by mrsfy on 16-Dec-16.
  */
 public class TopBar extends Parent {
+
+    private ToolBar toolBar;
 
     private Collection<? extends Action> noAuthActions() {
         return Arrays.asList(
@@ -61,23 +67,30 @@ public class TopBar extends Parent {
         EventBus.toObservable(EventType.AUTH).subscribe(new DefaultSubscriber<Object>() {
             @Override
             public void onNext(Object o) {
-                setToolbar();
+                getChildren().remove(toolBar);
+                setLayoutY(0);
+                setLayoutX(0);
+                toolBar = ActionUtils.updateToolBar(
+                        toolBar,
+                        Identity.isAuthenticated() ? authActions() : noAuthActions(),
+                        ActionUtils.ActionTextBehavior.SHOW
+                );
+                getChildren().add(toolBar);
             }
         });
     }
 
     private void setToolbar() {
-        ToolBar toolBar =  ActionUtils.createToolBar(
-                Identity.isAuthenticated() ? authActions() : noAuthActions(),
+        System.out.println(getLayoutBounds());
+        toolBar = ActionUtils.createToolBar(
+                !Identity.isAuthenticated() ? authActions() : noAuthActions(),
                 ActionUtils.ActionTextBehavior.SHOW
         );
 
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
-        toolBar.setPrefWidth(bounds.getWidth());
-        toolBar.setPrefHeight(30);
-
-        getChildren().removeAll();
+        toolBar.setMinWidth(bounds.getWidth());
+        toolBar.setMinHeight(30);
         getChildren().add(toolBar);
     }
 

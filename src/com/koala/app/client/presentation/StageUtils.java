@@ -12,6 +12,8 @@ import javafx.stage.Stage;
  */
 public class StageUtils {
 
+    private static Stage mainStage;
+
     public static void closeStage(ActionEvent event) {
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
@@ -35,4 +37,11 @@ public class StageUtils {
         return screenBounds.getMinY();
     }
 
+    public static Stage getMainStage() {
+        return mainStage;
+    }
+
+    public static void setMainStage(Stage mainStage) {
+        StageUtils.mainStage = mainStage;
+    }
 }
