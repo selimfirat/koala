@@ -7,7 +7,6 @@ import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.authentication.LogoutUseCase;
 import com.koala.app.client.presentation.login.LoginDialog;
 import com.koala.app.client.presentation.message.MessageDialog;
-import com.koala.app.client.presentation.new_property.NewPropertyDialog;
 import com.koala.app.client.presentation.register.RegisterDialog;
 import com.koala.app.client.presentation.StageUtils;
 import javafx.event.ActionEvent;
