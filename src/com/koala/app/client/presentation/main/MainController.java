@@ -2,9 +2,11 @@ package com.koala.app.client.presentation.main;
 
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
+import com.koala.app.client.data.house.House;
 import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.houses.AddHouseUseCase;
+import com.koala.app.client.domain.houses.MapHousesUseCase;
 import com.koala.app.client.presentation.IController;
 import com.koala.app.client.presentation.StageUtils;
 import com.koala.app.client.presentation.map.GoogleMap;
@@ -12,6 +14,7 @@ import com.koala.app.client.presentation.map.MapClickEvent;
 import com.koala.app.client.presentation.sell_house.SellHouseDialog;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
+import rx.Subscriber;
 
 import java.net.URL;
 import java.util.Map;
@@ -50,7 +53,23 @@ public class MainController implements IController {
 
         EventBus.toObservable(EventType.SELL_HOUSE_LOCATION_SELECTED).subscribe(sellHouseSubscriber());
 
+        UseCase mapHousesUseCase = new MapHousesUseCase();
+
+
+        //mapHousesUseCase.execute(mapHousesSubscriber());
+
         // Gmap.addMarker(new Marker(39.876870,32.747808));
+    }
+
+    private Subscriber mapHousesSubscriber() {
+        return new DefaultSubscriber<House>(){
+
+            @Override
+            public void onNext(House house) {
+                Gmap.addMapHouseMarker(house);
+            }
+
+        };
     }
 
     private DefaultSubscriber<Object> sellHouseSubscriber() {
@@ -62,7 +81,9 @@ public class MainController implements IController {
                 sellHouseDialog.showAndWait().ifPresent(new Consumer<ButtonType>() {
                     @Override
                     public void accept(ButtonType buttonType) {
+                        System.out.println("accept");
                         if (buttonType == ButtonType.FINISH) {
+                            System.out.println("finish button");
                             Map<Object, Object> p = sellHouseDialog.getProperties();
                             p.put("lat", location.getLat());
                             p.put("lng", location.getLng());
@@ -70,6 +91,11 @@ public class MainController implements IController {
                             UseCase sellHouseUseCase = new AddHouseUseCase(p);
 
                             sellHouseUseCase.execute(new DefaultSubscriber<Void>() {
+                                @Override
+                                public void onError(Throwable throwable) {
+                                    System.out.println(throwable.getMessage());
+                                }
+
                                 @Override
                                 public void onCompleted() {
                                     System.out.println("oley be");
@@ -83,4 +109,6 @@ public class MainController implements IController {
             }
         };
     }
+
+
 }

@@ -6,7 +6,11 @@ package com.koala.app.client.presentation.map;
 
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
+import com.koala.app.client.data.house.House;
 import com.koala.app.client.data.house.Location;
+import com.koala.app.client.domain.DefaultSubscriber;
+import com.koala.app.client.domain.UseCase;
+import com.koala.app.client.domain.houses.MapHousesUseCase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -21,7 +25,6 @@ public class GoogleMap extends Parent {
 
     //####################### Instance variables #######################
     private JSObject doc;
-    private EventHandler<MapBoundsChangedEvent> onMapBoundsChanged;
     private WebView webView;
     private WebEngine webEngine;
     private boolean ready;
@@ -40,9 +43,11 @@ public class GoogleMap extends Parent {
         webView.setPrefSize(screen.getBounds().getWidth(),screen.getBounds().getHeight() - 100);
         getChildren().add(webView); // Will be change as JavaFx Elements change
 
-        setOnMapBoundsChanged(event -> {
-            EventBus.trigger(EventType.MAP_BOUNDS_CHANGED, event);
-        });
+    }
+
+    public void addMapHouseMarker(House house) {
+
+
 
     }
 
@@ -50,8 +55,7 @@ public class GoogleMap extends Parent {
      * Initialize the Map
      * Creates a webview which is for calling google map from html.
      **/
-    private void initMap()
-    {
+    private void initMap() {
         ready = false;
 
         //####################### Initialize Web View #######################
@@ -125,18 +129,13 @@ public class GoogleMap extends Parent {
         }
     }
 
-    public void setOnMapBoundsChanged(EventHandler<MapBoundsChangedEvent> eventHandler) {
-        onMapBoundsChanged = eventHandler;
-    }
 
     public void handle(double swLat, double swLng, double neLat, double neLng, double centerLat, double centerLong) {
-        if(onMapBoundsChanged != null) {
             Location sw = new Location(swLat, swLng);
             Location ne = new Location(neLat, neLng);
             Location center = new Location(centerLat, centerLong);
             MapBoundsChangedEvent event = new MapBoundsChangedEvent(this, center, ne, sw);
-            onMapBoundsChanged.handle(event);
-        }
+            EventBus.trigger(EventType.MAP_BOUNDS_CHANGED, event);
     }
 
     public void handleSellHouseLocation(double lat, double lng) {

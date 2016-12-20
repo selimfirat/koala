@@ -1,5 +1,6 @@
 package com.koala.app.client.data.house;
 
+import com.mongodb.WriteResult;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import rx.Observable;
@@ -43,7 +44,9 @@ public class HousesRepository {
     }
 
     public Observable<Void> save(House house) {
-        houses.save(house);
+        System.out.println("save method");
+        WriteResult a = houses.save(house);
+        System.out.println(a);
         return Observable.empty();
     }
 

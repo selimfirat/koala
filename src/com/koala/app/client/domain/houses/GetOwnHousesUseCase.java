@@ -5,6 +5,7 @@ import com.koala.app.client.data.house.HousesRepository;
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.data.user.Identity;
+import org.jongo.marshall.jackson.oid.MongoObjectId;
 import rx.Observable;
 
 /**
