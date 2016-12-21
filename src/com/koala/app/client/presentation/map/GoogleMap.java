@@ -4,6 +4,8 @@ package com.koala.app.client.presentation.map;
  * Created by Burak Erkilic on 12.12.2016.
  */
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
 import com.koala.app.client.data.house.House;
@@ -29,6 +31,8 @@ public class GoogleMap extends Parent {
     private WebEngine webEngine;
     private boolean ready;
 
+    private ObjectMapper objectMapper;
+
     //####################################################################
 
     /**
@@ -43,11 +47,20 @@ public class GoogleMap extends Parent {
         webView.setPrefSize(screen.getBounds().getWidth(),screen.getBounds().getHeight() - 100);
         getChildren().add(webView); // Will be change as JavaFx Elements change
 
+        objectMapper = new ObjectMapper();
     }
 
     public void addMapHouseMarker(House house) {
 
+        String jsonHouse = null;
+        try {
+            jsonHouse = objectMapper.writeValueAsString(house);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
+        System.out.println(jsonHouse);
+        invokeJS("addHouseMapMarker(" + jsonHouse + ")");
 
     }
 
@@ -150,5 +163,9 @@ public class GoogleMap extends Parent {
 
     public void initSellHouseProcess() {
         invokeJS("initSellHouseProcess()");
+    }
+
+    public void removeAllMarkers() {
+        invokeJS("removeAllMarkers()");
     }
 }

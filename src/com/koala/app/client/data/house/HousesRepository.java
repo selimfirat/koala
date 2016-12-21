@@ -3,6 +3,7 @@ package com.koala.app.client.data.house;
 import com.mongodb.WriteResult;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+import org.jongo.MongoCursor;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -44,10 +45,14 @@ public class HousesRepository {
     }
 
     public Observable<Void> save(House house) {
-        System.out.println("save method");
-        WriteResult a = houses.save(house);
-        System.out.println(a);
+        houses.save(house);
+
         return Observable.empty();
+    }
+
+    public Observable<House> findAll() {
+
+        return Observable.from(houses.find().as(House.class));
     }
 
     public Observable<Void> removeById(String houseId) {

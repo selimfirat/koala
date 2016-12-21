@@ -1,9 +1,21 @@
-var markerClusterer;
+var houseClusterer;
 
-var addMarker = function (location, house) {
+
+var createMarker = function (location) {
 
     var marker = new google.maps.Marker({
         position: location
+    });
+
+
+    return marker;
+};
+
+var addHouseMapMarker = function (house) {
+
+    var marker = createMarker({
+        lat: house.location.latitude,
+        lng: house.location.longitude
     });
 
     marker.addListener("click", function () {
@@ -18,9 +30,15 @@ var addMarker = function (location, house) {
 
     });
 
-    return markerClusterer.addMarker(marker);
+    houseClusterer.addMarker(marker);
+
+    return marker;
+
 };
 
+var removeAllMarkers = function () {
+    houseClusterer.clearMarkers();
+}
 
 var initMarkers = function () {
     initMarkersClusterer();
@@ -28,7 +46,7 @@ var initMarkers = function () {
 };
 
 var initMarkersClusterer = function () {
-    markerClusterer = new MarkerClusterer(map, [],
+    houseClusterer = new MarkerClusterer(map, [],
         { imagePath: 'images/clusters/m' });
-    markerClusterer.setMaxZoom(20);
+    houseClusterer.setMaxZoom(20);
 };

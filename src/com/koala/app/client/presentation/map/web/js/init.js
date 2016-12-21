@@ -13,7 +13,7 @@ var init = function () {
 
         setStyle("night");
 
-        addMarker(bilkent);
+        createMarker(bilkent);
 
     });
 };

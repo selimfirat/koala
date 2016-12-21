@@ -38,6 +38,9 @@ public class MainController implements IController {
     @FXML
     private GoogleMap Gmap;
 
+
+    UseCase mapHousesUseCase = new MapHousesUseCase();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -53,16 +56,23 @@ public class MainController implements IController {
 
         EventBus.toObservable(EventType.SELL_HOUSE_LOCATION_SELECTED).subscribe(sellHouseSubscriber());
 
-        UseCase mapHousesUseCase = new MapHousesUseCase();
 
 
-        //mapHousesUseCase.execute(mapHousesSubscriber());
+        mapHousesUseCase.execute(mapHousesSubscriber());
 
-        // Gmap.addMarker(new Marker(39.876870,32.747808));
     }
 
     private Subscriber mapHousesSubscriber() {
         return new DefaultSubscriber<House>(){
+            @Override
+            public void onStart() {
+                Gmap.removeAllMarkers();
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                throwable.printStackTrace();
+            }
 
             @Override
             public void onNext(House house) {
@@ -78,32 +88,30 @@ public class MainController implements IController {
             public void onNext(Object o) {
                 MapClickEvent location = (MapClickEvent) o;
                 SellHouseDialog sellHouseDialog = new SellHouseDialog(StageUtils.getMainStage());
-                sellHouseDialog.showAndWait().ifPresent(new Consumer<ButtonType>() {
-                    @Override
-                    public void accept(ButtonType buttonType) {
-                        System.out.println("accept");
-                        if (buttonType == ButtonType.FINISH) {
-                            System.out.println("finish button");
-                            Map<Object, Object> p = sellHouseDialog.getProperties();
-                            p.put("lat", location.getLat());
-                            p.put("lng", location.getLng());
+                sellHouseDialog.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == ButtonType.FINISH) {
+                        Map<Object, Object> p = sellHouseDialog.getProperties();
+                        p.put("lat", location.getLat());
+                        p.put("lng", location.getLng());
 
-                            UseCase sellHouseUseCase = new AddHouseUseCase(p);
+                        Map<String, Object> ps = (Map) p;
 
-                            sellHouseUseCase.execute(new DefaultSubscriber<Void>() {
-                                @Override
-                                public void onError(Throwable throwable) {
-                                    System.out.println(throwable.getMessage());
-                                }
+                        UseCase sellHouseUseCase = new AddHouseUseCase(ps);
 
-                                @Override
-                                public void onCompleted() {
-                                    System.out.println("oley be");
-                                }
-                            });
+                        sellHouseUseCase.execute(new DefaultSubscriber<Void>() {
+                            @Override
+                            public void onError(Throwable throwable) {
+                                System.out.println(throwable.getMessage());
+                            }
+
+                            @Override
+                            public void onCompleted() {
+                                System.out.println("oley be");
+                                mapHousesUseCase.execute(mapHousesSubscriber());
+                            }
+                        });
 
 
-                        }
                     }
                 });
             }

@@ -16,29 +16,32 @@ class SaveHouseUseCase extends UseCase {
 
     private House house;
 
-    public SaveHouseUseCase(Map<Object, Object> p) {
-        System.out.println("save house beginning");
+
+    public SaveHouseUseCase(Map<String, Object> p) {
         house = new House();
 
         House.HouseFeatures houseFeatures = new House.HouseFeatures();
         houseFeatures.setTitle((String) p.get("title"));
         houseFeatures.setAge((int) p.get("buildingAge"));
-        // houseFeatures.setSize((int) p.get("size"));
+
+        houseFeatures.setSize(Integer.parseInt((String) p.get("size")));
         houseFeatures.setBathroomNumber((int) p.get("numberOfBathrooms"));
         houseFeatures.setFurnishedInfo((boolean) p.get("isFurnished"));
         houseFeatures.setRoomNumber((int) p.get("numberOfRooms"));
-        // houseFeatures.setPrice((int) p.get("price"));
+        houseFeatures.setPrice(Integer.parseInt((String) p.get("price")));
+        houseFeatures.setCurrentFloor((int) p.get("currentFloor"));
+        houseFeatures.setTotalFloor((int) p.get("totalFloor"));
 
-        house.setLocation(new Location((double) p.get("lat"), (double) p.get("lng")));
+
+        house.setLocation(new Location((double) (p.get("lat")), (double) (p.get("lng"))));
         house.setHouseType(House.Types.FOR_SALE);
+        house.setSeller(Identity.getCurrentUser());
         house.setHouseFeatures(houseFeatures);
-        System.out.println("savehouse");
     }
 
     @Override
     protected Observable<Void> buildUseCaseObservable() {
 
-        System.out.println("build");
 
         return HousesRepository.getInstance().save(house);
     }

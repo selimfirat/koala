@@ -201,7 +201,7 @@ public class SellHouseDialog extends Wizard {
     private TextField createTextField(String id) {
         TextField textField = new TextField();
         textField.setId(id);
-        getProperties().put(textField.getId(), textField.getText());
+        getProperties().put(id, textField.getText());
         textField.textProperty().addListener((observable, oldValue, newValue) -> getProperties().put(id, newValue));
         GridPane.setHgrow(textField, Priority.ALWAYS);
         return textField;

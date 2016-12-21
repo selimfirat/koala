@@ -28,22 +28,6 @@ public class House {
     public static class HouseFeatures {
         private String comments;
 
-        public int getCurrentFloor() {
-            return currentFloor;
-        }
-
-        public void setCurrentFloor(int currentFloor) {
-            this.currentFloor = currentFloor;
-        }
-
-        public int getTotalFloor() {
-            return totalFloor;
-        }
-
-        public void setTotalFloor(int totalFloor) {
-            this.totalFloor = totalFloor;
-        }
-
         public boolean isFurnished() {
             return furnished;
         }
@@ -109,7 +93,7 @@ public class House {
             return bathroomNumber;
         }
 
-        /*
+
         public void setCurrentFloor(int currentFloor) {
             this.currentFloor = currentFloor;
         }
@@ -125,7 +109,7 @@ public class House {
         public int getTotalFloor() {
             return totalFloor;
         }
-        */
+
         
         public void setPrice(int price) {
             this.price = price;
