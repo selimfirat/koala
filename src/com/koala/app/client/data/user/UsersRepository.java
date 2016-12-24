@@ -30,6 +30,7 @@ public class UsersRepository {
 
     private MongoCollection users;
 
+    //fidById method to find users in database from ID number
     public Observable<User> findById(String id) {
         return Observable.just(users.findOne(id).as(User.class));
     }
