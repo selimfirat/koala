@@ -78,4 +78,23 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!id.equals(user.id)) return false;
+        return fullName.equals(user.fullName);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + fullName.hashCode();
+        return result;
+    }
 }

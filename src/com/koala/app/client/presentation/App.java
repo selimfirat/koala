@@ -6,6 +6,7 @@ package com.koala.app.client.presentation;
  */
 
 import com.koala.app.client.data.house.HousesRepository;
+import com.koala.app.client.data.message.MessagesRepository;
 import com.koala.app.client.data.user.UsersRepository;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -28,7 +29,7 @@ public class App extends Application {
         Jongo jongo = new Jongo(new MongoClient(new MongoClientURI("mongodb://koala_user:koala123@ds119618.mlab.com:19618/koala")).getDB("koala"));
         UsersRepository.getInstance().setJongo(jongo);
         HousesRepository.getInstance().setJongo(jongo);
-
+        MessagesRepository.getInstance().setJongo(jongo);
         launch();
     }
 

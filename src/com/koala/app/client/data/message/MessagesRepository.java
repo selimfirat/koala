@@ -1,5 +1,6 @@
 package com.koala.app.client.data.message;
 
+import com.koala.app.client.data.user.Identity;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import rx.Observable;
@@ -37,12 +38,19 @@ public class MessagesRepository {
         return null;
     }
 
-    public Observable<Message> getMessagesOfCurrentUser() {
-        return null;
+    public Observable<Message> getSentMessagesOfCurrentUser() {
+        return Observable.from(messages.find("{sender: #}", Identity.getCurrentUser().getId()).as(Message.class));
+    }
+
+    public Observable<Message> getReceivedMessagesOfCurrentUser() {
+        return Observable.from(messages.find("{receiver: #}", Identity.getCurrentUser().getId()).as(Message.class));
     }
 
     public Observable<Void> save(Message message) {
-        return null;
+        return Observable.create(subscriber -> {
+            messages.save(message);
+            subscriber.onCompleted();
+        });
     }
 
 

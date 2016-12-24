@@ -2,6 +2,7 @@ package com.koala.app.client.domain.messaging;
 
 import com.koala.app.client.data.message.Message;
 import com.koala.app.client.data.message.MessagesRepository;
+import com.koala.app.client.data.user.Identity;
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
@@ -21,7 +22,7 @@ public class SendMessageUseCase extends UseCase {
     public SendMessageUseCase(User to, String message) {
         this.message = new Message(
                 to,
-                null, // TODO: get current user
+                Identity.getCurrentUser(), // TODO: get current user
                 message,
                 new Date()
         );

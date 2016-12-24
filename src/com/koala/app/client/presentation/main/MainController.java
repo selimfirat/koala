@@ -11,6 +11,7 @@ import com.koala.app.client.presentation.IController;
 import com.koala.app.client.presentation.StageUtils;
 import com.koala.app.client.presentation.map.GoogleMap;
 import com.koala.app.client.presentation.map.MapClickEvent;
+import com.koala.app.client.presentation.message.MessageDialog;
 import com.koala.app.client.presentation.sell_house.SellHouseDialog;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
@@ -38,6 +39,9 @@ public class MainController implements IController {
     @FXML
     private GoogleMap Gmap;
 
+    @FXML
+    private MessageDialog messageDialog;
+
 
     UseCase mapHousesUseCase = new MapHousesUseCase();
 
@@ -45,6 +49,7 @@ public class MainController implements IController {
     public void initialize(URL location, ResourceBundle resources) {
 
         Gmap.setMapCenter(39.876870, 32.747808);
+        messageDialog = new MessageDialog();
 
         EventBus.toObservable(EventType.SELL_HOUSE_CLICKED).subscribe(new DefaultSubscriber<Object>() {
             @Override
@@ -57,6 +62,12 @@ public class MainController implements IController {
         EventBus.toObservable(EventType.SELL_HOUSE_LOCATION_SELECTED).subscribe(sellHouseSubscriber());
 
 
+        EventBus.toObservable(EventType.MESSAGES_CLICKED).subscribe(new DefaultSubscriber<Object>() {
+            @Override
+            public void onNext(Object o) {
+                messageDialog.show();
+            }
+        });
 
         mapHousesUseCase.execute(mapHousesSubscriber());
 

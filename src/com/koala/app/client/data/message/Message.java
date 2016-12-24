@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by mrsfy on 13-Dec-16.
  */
-public class Message {
+public class Message implements Comparable<Message> {
 
     @MongoId
     private String id;
@@ -64,5 +64,15 @@ public class Message {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(Message o) {
+        return this.getDate().compareTo(o.getDate());
+    }
+
+    @Override
+    public String toString(){
+        return "[Message] ID: "+getId()+" TO: "+getTo()+" From: "+getFrom()+" Date: "+getDate()+" Context: "+getMessage();
     }
 }
