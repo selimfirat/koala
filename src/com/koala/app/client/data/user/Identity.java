@@ -10,23 +10,30 @@ public class Identity {
     private static User currentUser = null;
 
 
-    //logout method
+    /*logout method to logout from app
+     */
     public static void logout() {
         setCurrentUser(null);
     }
     
-    //setCurrentUser method
+    /*setCurrentUser method to set the user
+     *@param currentUser
+     */
     public static void setCurrentUser(User currentUser) {
         Identity.currentUser = currentUser;
     }
 
-    //getCurrentUser method
+    /*getCurrentUser method to get the user
+     *returns currentUser
+     */
     public static User getCurrentUser() {
         return currentUser;
     }
 
 
-    //isAuthenticated method to determine if the current user is null or not
+    /*isAuthenticated method to determine if there exists a user which uses the app
+     *returns currentUser != null
+     */
     public static boolean isAuthenticated(){
         return currentUser != null;
     }
