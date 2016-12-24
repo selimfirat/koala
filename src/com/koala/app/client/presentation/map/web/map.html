@@ -63,28 +63,28 @@
                         <b>Title: </b> <span id="title">Altın Köşk</span>
                     </li>
                     <li class="collection-item">
-                        <b> Price: </b> 1 546 890
+                        <b> Price: </b> <span id="price">1 546 890 TL</span>
                     </li>
                     <li class="collection-item">
-                        <b>Size: </b> 321 meter square
+                        <b>Size: </b> <span id="size">321 meter square <span>
                     </li>
                     <li class="collection-item">
-                        <b>Number of Rooms: </b> 10
+                        <b>Number of Rooms: </b> <span id="room-number">10</span>
                     </li>
                     <li class="collection-item">
-                        <b>Number of Bathrooms: </b> 4
+                        <b>Number of Bathrooms: </b> <span id="bathroom-number">4</span>
                     </li>
                     <li class="collection-item">
-                        <b>Building Age: </b> 15
+                        <b>Building Age: </b> <span id="building-age">15</span>
                     </li>
                     <li class="collection-item">
-                        <b>Current Floor: </b> 3
+                        <b>Current Floor: </b> <span id="current-floor">1-2-3</span>
                     </li>
                     <li class="collection-item">
-                        <b>Total Floor: </b> 3
+                        <b>Total Floor: </b> <span id="total-floor">3</span>
                     </li>
                     <li class="collection-item">
-                        <b>Furnished: </b> Yes
+                        <b>Furnished: </b> <span id="furnished">Yes</span>
                     </li>
                 </ul>
             </div>
@@ -98,7 +98,7 @@
                         </div>
                     </li>
                     <li class="collection-item">
-                        <b>Telephone Number: </b> <span id="phone-number" 0536 987 4587 </span>
+                        <b>Telephone Number: </b> <span id="phone-number"> 0536 987 4587 </span>
                     </li>
                     <li class="collection-item">
                         <b>E-mail: </b> <span id="e-mail"> mrsfy@gmail.com </span>
@@ -127,23 +127,37 @@
         <ul class="collection with-header">
             <li class="collection-header"><h4><b>My Own Properties</b></h4></li>
             <li class="collection-item">
-                <div><span id="tittle">Altın Köşk</span>
+                <div>
+                    <span id="tittle">Altın Köşk</span>
                     <a href="#!" class="secondary-content">
-                        <button><img src="images/edit.jpg" width="30px" height="30px"/></button>
-                        ​<button><img src="images/remove.jpg" width="30px" height="30px"/></button>
-                    ​</a>
+                        <button>
+                            <img src="images/edit.jpg" width="30px" height="30px"/>
+                        </button>
+                        ​<button>
+                        <img src="images/remove.jpg" width="30px" height="30px"/>
+                    </button>
+                        ​</a>
                 </div>
             </li>
             <li class="collection-item"><div>Urgent Sale At Bilkent
-                <a href="#!" class="secondary-content"><button><img src="images/edit.jpg" width="30px" height="30px"/>
-                </button>​<button><img src="images/remove.jpg" width="30px" height="30px"/></button>
+                <a href="#!" class="secondary-content">
+                    <button>
+                        <img src="images/edit.jpg" width="30px" height="30px"/>
+                    </button>
+                    ​<button>
+                    <img src="images/remove.jpg" width="30px" height="30px"/>
+                </button>
                     ​</a>
             </div></li>
             <li class="collection-item"><div>Furnished Cheap House
                 <a href="#!" class="secondary-content">
-                    <button><img src="images/edit.jpg" width="30px" height="30px"/>
-                    </button>​<button><img src="images/remove.jpg" width="30px" height="30px"/></button>
-                ​</a>
+                    <button id="edit-button">
+                        <img src="images/edit.jpg" width="30px" height="30px"/>
+                    </button >​
+                    <button id="remove-button">
+                        <img src="images/remove.jpg" width="30px" height="30px"/>
+                    </button>
+                    ​</a>
             </div></li>
 
         </ul>
@@ -205,38 +219,38 @@
 <div id="favorites" class="modal bottom-sheet">
     <div class="modal-content">
         <h4>Favorites</h4>
-            <li class="collection-item avatar">
-      		<img src="images/Favorites.png" alt="" class="circle">
-     		 <span class="title">Altın Köşk</span>
-     		 <p>Price: 27.000.000 Building Age: 5 <br>
-        		 Seller: Mert Deniz
-     		 </p>
-    		</li>
-       <!-- house #1 added -->
-           <li class="collection-item avatar">
-      <img src="images/Favorites.png" alt="" class="circle">
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-    </li>
-    <!-- house #2 added -->
-                <li class="collection-item avatar">
-      		<img src="images/Favorites.png" alt="" class="circle">
-     		 <span class="title">Title</span>
-     		 <p>First Line <br>
-        		 Second Line
-     		 </p>
-    		</li>
-       <!-- house #3 added -->
-                  <li class="collection-item avatar">
-      <img src="images/Favorites.png" alt="" class="circle">
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-    </li>
-    <!-- house #4 added -->
+        <li class="collection-item avatar">
+            <img src="images/Favorites.png" alt="" class="circle">
+            <span class="title">Altın Köşk</span>
+            <p>Price: 27.000.000 Building Age: 5 <br>
+                Seller: Mert Deniz
+            </p>
+        </li>
+        <!-- house #1 added -->
+        <li class="collection-item avatar">
+            <img src="images/Favorites.png" alt="" class="circle">
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+        </li>
+        <!-- house #2 added -->
+        <li class="collection-item avatar">
+            <img src="images/Favorites.png" alt="" class="circle">
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+        </li>
+        <!-- house #3 added -->
+        <li class="collection-item avatar">
+            <img src="images/Favorites.png" alt="" class="circle">
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+        </li>
+        <!-- house #4 added -->
     </div>
     <div class="modal-footer">
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
