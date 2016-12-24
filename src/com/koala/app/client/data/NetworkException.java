@@ -10,14 +10,24 @@ public class NetworkException extends RuntimeException {
 
     }
 
+    /*NetworkException exception
+     *@param message
+     */
     public NetworkException (String message) {
         super (message);
     }
 
+    /*NetworkException exception
+     *@param cause
+     */
     public NetworkException (Throwable cause) {
         super (cause);
     }
 
+    /*NetworkException exception
+     *@param message
+     *@param cause
+     */
     public NetworkException (String message, Throwable cause) {
         super (message, cause);
     }
