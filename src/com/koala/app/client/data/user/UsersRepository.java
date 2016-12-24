@@ -14,6 +14,7 @@ public class UsersRepository {
 
     private static UsersRepository _instance;
 
+    //getInstance method to return instance or create a user repository if it does not exist
     public static UsersRepository getInstance() {
         if (_instance == null)
             _instance = new UsersRepository();
@@ -23,6 +24,7 @@ public class UsersRepository {
 
     private UsersRepository(){ }
 
+    //setJongo method to set users that exists in database
     public void setJongo(Jongo jongo) {
         this.users = jongo.getCollection("users");
     }
@@ -35,10 +37,12 @@ public class UsersRepository {
         return Observable.just(users.findOne(id).as(User.class));
     }
 
+    //findByUsernameAndPassword method to find a user from its username and password only
     public Observable<User> findByUsernameAndPassword(String username, String password) {
         return Observable.just(users.findOne("{username: #, password: #}", username, password).as(User.class));
     }
 
+    //save method to add a user
     public Observable<Void> save(User user) {
         return Observable.create(subscriber -> {
             users.save(user);
@@ -46,10 +50,12 @@ public class UsersRepository {
         });
     }
 
+    //usernameExists method to identify if the given username already exists or not
     public boolean usernameExists(String username) {
         return users.count("{username: #}", username) > 0;
     }
 
+    //logout method
     public Observable<Void> logout() {
 
         return Observable.empty();
