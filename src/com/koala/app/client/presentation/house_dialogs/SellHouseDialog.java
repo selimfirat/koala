@@ -1,20 +1,23 @@
-package com.koala.app.client.presentation.sell_house;
+package com.koala.app.client.presentation.house_dialogs;
 
-import com.koala.app.client.presentation.StageUtils;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.HTMLEditor;
 import org.controlsfx.dialog.Wizard;
 import org.controlsfx.dialog.WizardPane;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mrsfy on 19-Dec-16.
@@ -80,13 +83,37 @@ public class SellHouseDialog extends Wizard {
 
     public SellHouseDialog(Object owner) {
         super(owner);
+        defaults = new HashMap<>();
         setTitle("Sell House");
 
         setFlow(new LinearFlow(
                 page1(),
-                page2()
+                page2(),
+                page3()
         ));
 
+
+    }
+
+    private Map<String, Object> defaults;
+
+    public SellHouseDialog(Object owner, Map<String, Object> defaults) {
+        super(owner);
+        this.defaults = defaults;
+
+        if (defaults.containsKey("id"))
+            getProperties().put("id", defaults.get("id"));
+
+        setTitle("Sell House");
+
+
+        System.out.println("Defaults" + defaults);
+
+        setFlow(new LinearFlow(
+                page1(),
+                page2(),
+                page3()
+        ));
     }
 
     private WizardPane page1() {
@@ -147,10 +174,57 @@ public class SellHouseDialog extends Wizard {
                 wizard.invalidProperty().bind(vs.invalidProperty());
             }
 
+
         };
     }
 
     private WizardPane page2() {
+        return new WizardPane() {
+            HTMLEditor htmlEditor;
+            {
+                VBox vBox = new VBox();
+                vBox.setSpacing(10);
+
+                String id = "comments";
+
+                htmlEditor = new HTMLEditor();
+                htmlEditor.setPrefHeight(245);
+                htmlEditor.setId(id);
+
+                if (defaults.containsKey(id)) {
+                    Object obj = defaults.get(id);
+                    htmlEditor.setHtmlText((String) obj);
+                } else {
+                    String INITIAL_TEXT = "Lorem ipsum dolor sit "
+                            + "amet, consectetur adipiscing elit. Nam tortor felis, pulvinar "
+                            + "in scelerisque cursus, pulvinar at ante. Nulla consequat"
+                            + "congue lectus in sodales. Nullam eu est a felis ornare "
+                            + "bibendum et nec tellus. Vivamus non metus tempus augue auctor "
+                            + "ornare. Duis pulvinar justo ac purus adipiscing pulvinar. "
+                            + "Integer congue faucibus dapibus. Integer id nisl ut elit "
+                            + "aliquam sagittis gravida eu dolor. Etiam sit amet ipsum "
+                            + "sem.";
+
+                    htmlEditor.setHtmlText(INITIAL_TEXT);
+                }
+
+                vBox.getChildren().addAll(new Label("Comments"), htmlEditor);
+                setContent(vBox);
+            }
+
+            @Override
+            public void onEnteringPage(Wizard wizard) {
+                wizard.invalidProperty().unbind();
+            }
+
+            @Override
+            public void onExitingPage(Wizard wizard) {
+                wizard.getProperties().put("comments", htmlEditor.getHtmlText());
+            }
+        };
+    }
+
+    private WizardPane page3() {
         return new WizardPane() {
             ValidationSupport vs = new ValidationSupport();
             {
@@ -180,21 +254,15 @@ public class SellHouseDialog extends Wizard {
         };
     }
 
-    private WizardPane page3() {
-        return new WizardPane() {
-
-            {
-                TextArea textArea = new TextArea();
-            }
-
-        };
-    }
-
     private CheckBox createCheckBox(String id) {
         CheckBox checkBox = new CheckBox();
-        checkBox.setId("isFurnished");
+        checkBox.setId(id);
         getProperties().put(checkBox.getId(), checkBox.isSelected());
         checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> getProperties().put(checkBox.getId(), newValue));
+
+        if (defaults.containsKey(id))
+            checkBox.setSelected((boolean) defaults.get(id));
+
         return checkBox;
     }
 
@@ -204,6 +272,13 @@ public class SellHouseDialog extends Wizard {
         getProperties().put(id, textField.getText());
         textField.textProperty().addListener((observable, oldValue, newValue) -> getProperties().put(id, newValue));
         GridPane.setHgrow(textField, Priority.ALWAYS);
+
+        if (defaults.containsKey(id)) {
+            Object obj = defaults.get(id);
+
+
+            textField.setText(obj.getClass().equals(String.class) ? (String) obj : String.valueOf((int) obj));
+        }
         return textField;
     }
 
@@ -215,6 +290,10 @@ public class SellHouseDialog extends Wizard {
         getProperties().put(comboBox.getId(), comboBox.getSelectionModel().getSelectedIndex());
         comboBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> getProperties().put(id, newValue));
         GridPane.setHgrow(comboBox, Priority.ALWAYS);
+
+        if (defaults.containsKey(id))
+            comboBox.getSelectionModel().select((int) defaults.get(id));
+
         return comboBox;
     }
 

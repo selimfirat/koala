@@ -1,5 +1,8 @@
 package com.koala.app.client.data.user;
 
+import com.koala.app.client.EventBus;
+import com.koala.app.client.EventType;
+
 /**
  * Created by mrsfy on 13-Dec-16.
  */
@@ -20,6 +23,7 @@ public class Identity {
      *@param currentUser
      */
     public static void setCurrentUser(User currentUser) {
+        EventBus.trigger(EventType.AUTH);
         Identity.currentUser = currentUser;
     }
 

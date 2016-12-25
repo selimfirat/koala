@@ -1,4 +1,4 @@
-package com.koala.app.client.presentation.register;
+package com.koala.app.client.presentation.authentication;
 
 import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
@@ -6,6 +6,7 @@ import com.koala.app.client.domain.authentication.RegisterUseCase;
 import com.koala.app.client.presentation.IController;
 import com.koala.app.client.presentation.Progress;
 import com.koala.app.client.presentation.StageUtils;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -63,13 +64,16 @@ public class RegisterController implements IController {
 
             @Override
             public void onError(Throwable throwable) {
-                // on error
-                Progress.end();
+                Platform.runLater(() -> {
+                    // on error
+                    Progress.end();
 
-                Notifications.create()
-                        .title("Error during registration")
-                        .text(throwable.getMessage())
-                        .showError();
+                    Notifications.create()
+                            .title("Error during registration")
+                            .text(throwable.getMessage())
+                            .showError();
+
+                });
             }
         });
     }

@@ -2,11 +2,16 @@ package com.koala.app.client.domain.authentication;
 
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
+import com.koala.app.client.data.SocketHelper;
+import com.koala.app.client.data.SocketListener;
+import com.koala.app.client.data.message.Message;
 import com.koala.app.client.data.user.Identity;
 import com.koala.app.client.data.user.User;
-import com.koala.app.client.data.user.UsersRepository;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -15,7 +20,6 @@ import rx.Observable;
  */
 public class LoginUseCase extends UseCase {
 
-    private UsersRepository usersRepository = UsersRepository.getInstance();
 
     private String username, password;
 
@@ -26,14 +30,28 @@ public class LoginUseCase extends UseCase {
 
     @Override
     protected Observable<User> buildUseCaseObservable() {
-        return usersRepository.findByUsernameAndPassword(username, password).flatMap(user -> {
+        return handleSocket().flatMap(user -> {
             if (user == null)
                 return Observable.error(new WrongUsernameOrPasswordException());
 
+
             Identity.setCurrentUser(user);
-            EventBus.trigger(EventType.AUTH);
 
             return Observable.just(user);
+        });
+    }
+
+    private Observable<User> handleSocket() {
+        return Observable.create(subscriber -> {
+            Map<String, String> data = new HashMap<>();
+            data.put("username", username);
+            data.put("password", password);
+
+            SocketHelper.echo("LOGIN", data, User.class, res -> {
+
+                System.out.println(res);
+                subscriber.onNext(res);
+            });
         });
     }
 

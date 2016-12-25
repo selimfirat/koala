@@ -2,6 +2,7 @@ package com.koala.app.client.data.house;
 
 import com.koala.app.client.data.user.User;
 import org.jongo.marshall.jackson.oid.MongoId;
+import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -12,8 +13,8 @@ import org.jongo.marshall.jackson.oid.MongoId;
 public class House {
 
 
-    @MongoId
     //Instance Variables
+    @MongoId
     private String id;
 
     private User seller;
@@ -21,24 +22,28 @@ public class House {
     private Location location;
     private HouseFeatures houseFeatures;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public enum Types {
         FOR_RENT,
         FOR_SALE
 
     }
-        
+
     public static class HouseFeatures {
-        
+
         //Instance variables
         private String comments;
-       
+
         /*isFurnished method to check whether the house is furnished or not
         *returns furnisned.
         */
         public boolean isFurnished() {
             return furnished;
         }
-        
+
         /*setFurnished method to set the house current condition whether it is furnished or not
         *@param furnisned.
         */
@@ -71,7 +76,7 @@ public class House {
 
         public HouseFeatures() {
         }
-        
+
         //instance variables
         private String title;
         
@@ -86,42 +91,42 @@ public class House {
             this.bathroomNumber = bathroomNumber;
             this.comments = comments;
         }
-        
+
         /*setComments method to set comments about that house
         *@param comments
         */
         public void setComments(String comments) {
             this.comments = comments;
         }
-        
+
         /*getComment method to get comments about that house
         *returns comments.
         */
         public String getComments() {
             return comments;
         }
-        
+
         /*setFurnishedInfo method for the house's current condition whether it is furnished or not
         *@param furnished
         */
         public void setFurnishedInfo(boolean furnished) {
             this.furnished = furnished;
         }
-        
+
         /*getFurnishedInfo method to get house's current value whether it is furnished or not
         *returns ageOfBuilding.
          */
         public boolean getFurnishedInfo() {
             return furnished;
         }
-        
+
         /*setBathroomNumber method to get how many bathroom does the house contains
         *@param bathroomNumber.
         */
         public void setBathroomNumber(int bathroomNumber) {
             this.bathroomNumber = bathroomNumber;
         }
-        
+
         /*getBathroomNumber method to get how many bathroom does the house contains
         *returns getBathroomNumber.
         */
@@ -135,21 +140,21 @@ public class House {
         public void setCurrentFloor(int currentFloor) {
             this.currentFloor = currentFloor;
         }
-        
+
         /*getCurrentFloor method to gave floor number of the house
         *returns currentFloor.
         */
         public int getCurrentFloor() {
             return currentFloor;
         }
-        
+
         /*setTotalFloor method to set total floor number of a house
         *@param totalFloor.
         */
         public void setTotalFloor(int totalFloor) {
             this.totalFloor = totalFloor;
         }
-        
+
         /*getTotalFloor method to get total floor number of a house
         *returns totalFloor.
         */
@@ -163,14 +168,14 @@ public class House {
         public void setPrice(int price) {
             this.price = price;
         }
-        
+
         /*getPrice method to get price of the house
        *returns price.
        */
         public int getPrice() {
             return price;
         }
-        
+
        /*setAge method to set age of the house
        *@param ageOfBuilding.
        */
@@ -220,12 +225,26 @@ public class House {
             return title;
         }
 
-
+        @Override
+        public String toString() {
+            return "HouseFeatures{" +
+                    "comments='" + comments + '\'' +
+                    ", currentFloor=" + currentFloor +
+                    ", totalFloor=" + totalFloor +
+                    ", bathroomNumber=" + bathroomNumber +
+                    ", furnished=" + furnished +
+                    ", price=" + price +
+                    ", size=" + size +
+                    ", ageOfBuilding=" + ageOfBuilding +
+                    ", roomNumber=" + roomNumber +
+                    ", title='" + title + '\'' +
+                    '}';
+        }
     }
     //constructors
     public House() {
     }
-    
+
     public House(String id, User seller, Types houseType, HouseFeatures houseFeatures){
         this.id = id;
         this.seller = seller;
@@ -285,7 +304,19 @@ public class House {
     /*setHouseFeatures method to set house features
     *@param houseType
     */
+
     public void setHouseFeatures(HouseFeatures houseFeatures) {
         this.houseFeatures = houseFeatures;
+    }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "id='" + id + '\'' +
+                ", seller=" + seller +
+                ", houseType=" + houseType +
+                ", location=" + location +
+                ", houseFeatures=" + houseFeatures +
+                '}';
     }
 }

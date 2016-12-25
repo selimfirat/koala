@@ -10,18 +10,17 @@ import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
 import com.koala.app.client.data.house.House;
 import com.koala.app.client.data.house.Location;
-import com.koala.app.client.domain.DefaultSubscriber;
-import com.koala.app.client.domain.UseCase;
-import com.koala.app.client.domain.houses.MapHousesUseCase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
-import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import netscape.javascript.JSObject;
+
+import java.io.IOException;
+import java.util.List;
 
 public class GoogleMap extends Parent {
 
@@ -48,20 +47,6 @@ public class GoogleMap extends Parent {
         getChildren().add(webView); // Will be change as JavaFx Elements change
 
         objectMapper = new ObjectMapper();
-    }
-
-    public void addMapHouseMarker(House house) {
-
-        String jsonHouse = null;
-        try {
-            jsonHouse = objectMapper.writeValueAsString(house);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(jsonHouse);
-        invokeJS("addHouseMapMarker(" + jsonHouse + ")");
-
     }
 
     /**
@@ -108,7 +93,7 @@ public class GoogleMap extends Parent {
                 if (newState == Worker.State.SUCCEEDED)
                 {
                     doc = (JSObject) webEngine.executeScript("window");
-                    doc.setMember("app", GoogleMap.this); // Set app variable into Javascript code which is referring to this class
+                    doc.setMember("app",GoogleMap.this); // Set app variable into Javascript code which is referring to this class
                 }
             }
         });
@@ -143,18 +128,6 @@ public class GoogleMap extends Parent {
     }
 
 
-    public void handle(double swLat, double swLng, double neLat, double neLng, double centerLat, double centerLong) {
-            Location sw = new Location(swLat, swLng);
-            Location ne = new Location(neLat, neLng);
-            Location center = new Location(centerLat, centerLong);
-            MapBoundsChangedEvent event = new MapBoundsChangedEvent(this, center, ne, sw);
-            EventBus.trigger(EventType.MAP_BOUNDS_CHANGED, event);
-    }
-
-    public void handleSellHouseLocation(double lat, double lng) {
-        EventBus.trigger(EventType.SELL_HOUSE_LOCATION_SELECTED, new MapClickEvent(this, lat, lng));
-    }
-
     public void setMapCenter(double lat, double lng) {
         String sLat = Double.toString(lat);
         String sLng = Double.toString(lng);
@@ -167,5 +140,63 @@ public class GoogleMap extends Parent {
 
     public void removeAllMarkers() {
         invokeJS("removeAllMarkers()");
+    }
+
+    public void addMapHouseMarker(House house) {
+
+        String jsonHouse = null;
+        try {
+            jsonHouse = objectMapper.writeValueAsString(house);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        invokeJS("addHouseMapMarker(" + jsonHouse + ")");
+
+    }
+
+    public void handle(double swLat, double swLng, double neLat, double neLng, double centerLat, double centerLong) {
+        Location sw = new Location(swLat, swLng);
+        Location ne = new Location(neLat, neLng);
+        System.out.println("Map bounds changed event");
+        Location center = new Location(centerLat, centerLong);
+        MapBoundsChangedEvent event = new MapBoundsChangedEvent(this, center, ne, sw);
+        EventBus.trigger(EventType.MAP_BOUNDS_CHANGED, event);
+    }
+
+    public void error(String err) {
+        System.out.println("JS Err:" + err);
+    }
+
+    public void handleSellHouseLocation(double lat, double lng) {
+        EventBus.trigger(EventType.SELL_HOUSE_LOCATION_SELECTED, new MapClickEvent(this, lat, lng));
+    }
+
+    public void editHouse(String houseJson) {
+
+        House house = null;
+
+        try {
+            house = objectMapper.readValue(houseJson, House.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        EventBus.trigger(EventType.EDIT_HOUSE_CLICKED, house);
+
+    }
+
+    public void removeHouse(String id) {
+        EventBus.trigger(EventType.REMOVE_HOUSE_CLICKED, id);
+    }
+
+    public void openMyOwnProperties(List<House> houses) {
+        String housesJson = null;
+        try {
+            housesJson = objectMapper.writeValueAsString(houses);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        invokeJS("openMyOwnProperties(" + housesJson + ")");
     }
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import org.controlsfx.control.MaskerPane?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.koala.app.client.presentation.register.RegisterController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.koala.app.client.presentation.authentication.RegisterController">
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="350.0">
          <children>
             <Label layoutX="39.0" layoutY="26.0" prefHeight="40.0" prefWidth="117.0" text="Username :" />

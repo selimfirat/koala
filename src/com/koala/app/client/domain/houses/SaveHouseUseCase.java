@@ -1,7 +1,7 @@
 package com.koala.app.client.domain.houses;
 
+import com.koala.app.client.data.SocketHelper;
 import com.koala.app.client.data.house.House;
-import com.koala.app.client.data.house.HousesRepository;
 import com.koala.app.client.data.house.Location;
 import com.koala.app.client.data.user.Identity;
 import com.koala.app.client.domain.UseCase;
@@ -31,7 +31,10 @@ class SaveHouseUseCase extends UseCase {
         houseFeatures.setPrice(Integer.parseInt((String) p.get("price")));
         houseFeatures.setCurrentFloor((int) p.get("currentFloor"));
         houseFeatures.setTotalFloor((int) p.get("totalFloor"));
+        houseFeatures.setComments((String) p.get("comments"));
 
+        if (p.containsKey("id"))
+            house.setId((String) p.get("id"));
 
         house.setLocation(new Location((double) (p.get("lat")), (double) (p.get("lng"))));
         house.setHouseType(House.Types.FOR_SALE);
@@ -42,7 +45,13 @@ class SaveHouseUseCase extends UseCase {
     @Override
     protected Observable<Void> buildUseCaseObservable() {
 
+        return Observable.create(subscriber -> {
 
-        return HousesRepository.getInstance().save(house);
+            SocketHelper.echo("SAVE_HOUSE", house, String.class, res -> {
+                System.out.print(res);
+                subscriber.onCompleted();
+            });
+
+        });
     }
 }

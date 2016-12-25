@@ -20,5 +20,10 @@
     <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:2.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:8.40.12" level="project" />
+    <orderEntry type="library" name="Maven: io.socket:socket.io-client:0.8.3" level="project" />
+    <orderEntry type="library" name="Maven: io.socket:engine.io-client:0.8.3" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.11.0" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20090211" level="project" />
   </component>
 </module>

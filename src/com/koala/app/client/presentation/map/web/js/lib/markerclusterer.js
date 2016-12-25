@@ -40,7 +40,7 @@
  * @param {google.maps.Map} map The Google map to attach to.
  * @param {Array.<google.maps.Marker>=} opt_markers Optional markers to add to
  *   the cluster.
- * @param {Object=} opt_options support the following options:
+ * @param {Object=} opt_options support the following houseOptions:
  *     'gridSize': (number) The grid size of a cluster in pixels.
  *     'maxZoom': (number) The maximum zoom level that a marker can be part of a
  *                cluster.

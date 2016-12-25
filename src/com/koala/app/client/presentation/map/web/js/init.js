@@ -1,20 +1,25 @@
 var map;
-var bilkent = {lat: 39.876870, lng: 30.309906005859375};
-
+var app;
 var init = function () {
     $(document).ready(function () {
-        initMap();
-        initUtils();
-        initSearch();
-        initMarkers();
-        initGeolocation();
-        initStyles();
-        initDesign();
+        try {
+            initMap();
+            initUtils();
+            initSearch();
+            initMarkers();
+            initGeolocation();
+            initStyles();
+            initDesign();
 
-        setStyle("night");
+            setStyle("night");
 
-        createMarker(bilkent);
-
+            addHouseMapMarker({"id":"585d9f418fa3f829cc6ee5e7","seller":{"id":"58570e2b8fa3f829cc6edb63","fullName":"dsaasddsa","password":"3dc231ebed3a7acc761a0df580608897","email":"dasa@asdads.com","username":"mrsfy__","phoneNumber":""},"houseType":"FOR_SALE","location":{"longitude":32.766380310058594,"latitude":39.85520154639845},"houseFeatures":{"comments":null,"currentFloor":4,"totalFloor":4,"bathroomNumber":2,"furnished":true,"price":12321,"size":123,"ageOfBuilding":3,"roomNumber":1,"title":"asdas","age":3,"furnishedInfo":true}});
+        } catch (err) {
+            if (app)
+                app.error(err.message)
+            else
+                console.log(err.message)
+        }
     });
 };
 

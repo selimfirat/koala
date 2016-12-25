@@ -31,8 +31,6 @@
 <body>
 <div id="house-details" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4 id="house-title"> <b> Details of the House </b>  </h4>
-
         <div class="row"><div class="w3-container">
         </div>
 
@@ -60,48 +58,48 @@
             <div class="col s8">
                 <ul class="collection">
                     <li class="collection-item">
-                        <b>Title: </b> <span id="title">Altın Köşk</span>
+                        <b>Title: </b> <span class="title">Altın Köşk</span>
                     </li>
                     <li class="collection-item">
-                        <b> Price: </b> <span id="price">1 546 890 TL</span>
+                        <b> Price: </b> <span class="price">1 546 890</span> TL
                     </li>
                     <li class="collection-item">
-                        <b>Size: </b> <span id="size">321 meter square <span>
+                        <b>Size: </b> <span class="size">321 meter square <span>
                     </li>
                     <li class="collection-item">
-                        <b>Number of Rooms: </b> <span id="room-number">10</span>
+                        <b>Number of Rooms: </b> <span class="roomNumber">10</span>
                     </li>
                     <li class="collection-item">
-                        <b>Number of Bathrooms: </b> <span id="bathroom-number">4</span>
+                        <b>Number of Bathrooms: </b> <span class="bathroomNumber">4</span>
                     </li>
                     <li class="collection-item">
-                        <b>Building Age: </b> <span id="building-age">15</span>
+                        <b>Building Age: </b> <span class="buildingAge">15</span>
                     </li>
                     <li class="collection-item">
-                        <b>Current Floor: </b> <span id="current-floor">1-2-3</span>
+                        <b>Current Floor: </b> <span class="currentFloor">1-2-3</span>
                     </li>
                     <li class="collection-item">
-                        <b>Total Floor: </b> <span id="total-floor">3</span>
+                        <b>Total Floor: </b> <span class="totalFloor">3</span>
                     </li>
                     <li class="collection-item">
-                        <b>Furnished: </b> <span id="furnished">Yes</span>
+                        <b>Furnished: </b> <span class="isFurnished">Yes</span>
                     </li>
                 </ul>
             </div>
 
-            <div class="col s4">
+            <div class="col s4" class="seller">
                 <ul class="collection">
                     <li class="collection-item">
                         <div class="chip">
                             <img src="images/cute-koala.png" alt="Contact Person">
-                            <span id="seller-name"> Jane Doe</span>
+                            <span class="fullName"> Jane Doe</span>
                         </div>
                     </li>
                     <li class="collection-item">
-                        <b>Telephone Number: </b> <span id="phone-number"> 0536 987 4587 </span>
+                        <b>Phone Number: </b> <span class="phoneNumber"> 0536 987 4587 </span>
                     </li>
                     <li class="collection-item">
-                        <b>E-mail: </b> <span id="e-mail"> mrsfy@gmail.com </span>
+                        <b>E-mail: </b> <span class="email"> mrsfy@gmail.com </span>
                     </li>
                     <p align="center">
                         <a id="send-message" class="waves-effect waves-light btn">Send Message</a>
@@ -109,12 +107,20 @@
                     <p align="center">
                         <button id="fav-button"><img src="images/star.png" width="60px" height="60px"/></button>​​​​​​​​​​​​​
                     </p>
+                    <p align="center">
+
+                        <a class="waves-effect waves-light btn" id="edit-house">Edit</a>
+                    </p>
+                    <p align="center">
+
+                        <a class="waves-effect waves-light btn" id="remove-house">Remove</a>
+                    </p>
                 </ul>
             </div>
 
         </div>
 
-        <p id="house-comment">
+        <p class="comments">
             Original 1908 building (1012 Sq. Ft) 1977 addition (1056 Sq. Ft) 2005 addition (1150 Sq. Ft) totaling 3218 Sq. Ft under roof plus 1000 Sq Ft beer garden sit on (2) 25' x 100' lots. AND the adjoining 25' x 100' lot is included which could allow for future expansion.The 73- Saloon is a longstanding stable business in downtown Philip, SD. The small western South Dakota town of Philip is a thriving community whose variety of businesses draw in customers from miles and miles around. Some of these businesses include: grain elevators, farm implement dealerships, car dealership, livestock market, grocery store, hardware store, lumber yard, hospital, clinic, pharmacy, dentist, chiropractor, auto body shops, manufacturing, welding, movie theater, exercise studio, bank, etc.....all the things that bring people to town. Take advantage of this opportunity, the last chance to buy this bar was 32 years ago, don't wait til it comes around again.</p>
     </div>
     <div class="modal-footer">
@@ -125,40 +131,19 @@
 <div id="my-own-properties" class="modal modal-fixed-footer">
     <div class="modal-content">
         <ul class="collection with-header">
-            <li class="collection-header"><h4><b>My Own Properties</b></h4></li>
-            <li class="collection-item">
+            <li class="collection-header"><h4>My Own Properties</h4></li>
+            <li class="collection-item own-property-item">
                 <div>
-                    <span id="tittle">Altın Köşk</span>
-                    <a href="#!" class="secondary-content">
-                        <button>
+                    <span class="title">Altın Köşk</span>
+                    <a href="#!" class="secondary-content edit">
                             <img src="images/edit.jpg" width="30px" height="30px"/>
-                        </button>
-                        ​<button>
+                    </a>
+
+                    <a href="#!" class="secondary-content remove">
                         <img src="images/remove.jpg" width="30px" height="30px"/>
-                    </button>
-                        ​</a>
+                    ​</a>
                 </div>
             </li>
-            <li class="collection-item"><div>Urgent Sale At Bilkent
-                <a href="#!" class="secondary-content">
-                    <button>
-                        <img src="images/edit.jpg" width="30px" height="30px"/>
-                    </button>
-                    ​<button>
-                    <img src="images/remove.jpg" width="30px" height="30px"/>
-                </button>
-                    ​</a>
-            </div></li>
-            <li class="collection-item"><div>Furnished Cheap House
-                <a href="#!" class="secondary-content">
-                    <button id="edit-button">
-                        <img src="images/edit.jpg" width="30px" height="30px"/>
-                    </button >​
-                    <button id="remove-button">
-                        <img src="images/remove.jpg" width="30px" height="30px"/>
-                    </button>
-                    ​</a>
-            </div></li>
 
         </ul>
     </div>
@@ -167,53 +152,6 @@
     </div>
 </div>
 
-<div id="sell-house-dialog" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <h4>Sell House</h4>
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s6">
-                    <input placeholder="Age of the building" id="age" type="text" class="validate">
-                    <label for="age">Age</label>
-                </div>
-                <div class="input-field col s6">
-                    <input placeholder="Size of the house" id="size" type="text" class="validate">
-                    <label for="size">Size</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-                    <label for="disabled">Disabled</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Password</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    This is an inline input field:
-                    <div class="input-field inline">
-                        <input id="email" type="email" class="validate">
-                        <label for="email" data-error="wrong" data-success="right">Email</label>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">CLOSE</a>
-    </div>
-</div>
 
 <!-- Favorites -->
 <div id="favorites" class="modal bottom-sheet">
@@ -268,12 +206,14 @@
 <!-- JS Initials -->
 <script src="js/init.js"></script>
 <script src="js/geolocation.js"></script>
+<script src="js/house.js"></script>
 <script src="js/markers.js"></script>
 <script src="js/search.js"></script>
 <script src="js/design.js"></script>
 <script src="js/styles.js"></script>
 <script src="js/utils.js"></script>
 <script src = "js/slider.js"></script>
+<script src = "js/own_properties.js"></script>
 
 <!-- JS Styles -->
 <script src="js/styles/night.js"></script>

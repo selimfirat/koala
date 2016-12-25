@@ -1,9 +1,12 @@
 package com.koala.app.client.domain.authentication;
 
+import com.koala.app.client.data.SocketHelper;
+import com.koala.app.client.data.SocketListener;
+import com.koala.app.client.data.SocketProvider;
 import com.koala.app.client.data.user.User;
-import com.koala.app.client.data.user.UsersRepository;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
+import rx.Subscriber;
 
 import javax.xml.bind.ValidationException;
 
@@ -13,7 +16,6 @@ import javax.xml.bind.ValidationException;
 public class RegisterUseCase extends UseCase {
 
     private User user;
-    private UsersRepository usersRepository = UsersRepository.getInstance();
     private String passwordAgain;
 
     public RegisterUseCase(String fullName, String username, String password, String passwordAgain, String phoneNumber, String email) {
@@ -40,15 +42,27 @@ public class RegisterUseCase extends UseCase {
             vex = new ValidationException("Passwords do not match!");
         else if (user.getFullName().isEmpty())
             vex = new ValidationException("Name field cannot be empty!");
-        else if (usersRepository.usernameExists(user.getUsername()))
-            vex = new ValidationException("Username "+ user.getUsername() + " is already in use!");
+
 
         if (vex != null)
             return Observable.error(vex);
 
-
         user.setPassword(Encryption.getMD5(user.getPassword()));
 
-        return usersRepository.save(user);
+
+        return Observable.create(subscriber -> {
+            SocketHelper.echo("REGISTER", user, String.class, res -> {
+
+                if (res.equals("USERNAME_EXISTS"))
+                    subscriber.onError(new ValidationException("This username already exists!"));
+                else if (res.equals("EMAIL_EXISTS"))
+                    subscriber.onError(new ValidationException("This email already exists!"));
+                else {
+                    System.out.println(res);
+                    subscriber.onCompleted();
+                }
+
+            });
+        });
     }
 }

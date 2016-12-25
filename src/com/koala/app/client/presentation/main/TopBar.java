@@ -4,20 +4,13 @@ import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
 import com.koala.app.client.data.user.Identity;
 import com.koala.app.client.domain.DefaultSubscriber;
-import com.koala.app.client.domain.authentication.LogoutUseCase;
-import com.koala.app.client.presentation.login.LoginDialog;
-import com.koala.app.client.presentation.message.MessageDialog;
-import com.koala.app.client.presentation.register.RegisterDialog;
+import com.koala.app.client.presentation.authentication.LoginDialog;
+import com.koala.app.client.presentation.authentication.RegisterDialog;
 import com.koala.app.client.presentation.StageUtils;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.control.action.ActionGroup;
 import org.controlsfx.control.action.ActionUtils;
@@ -52,23 +45,26 @@ public class TopBar extends Parent {
                 ACTION_SPAN,
                 new Action("Sell House", e -> EventBus.trigger(EventType.SELL_HOUSE_CLICKED)),
                 ACTION_SEPARATOR,
+                new Action("My Own Properties", e -> EventBus.trigger(EventType.MY_OWN_PROPERTIES_CLICKED)),
+                ACTION_SEPARATOR,
                 new Action("Favorites", e -> EventBus.trigger(EventType.FAVORITES_CLICKED)),
                 ACTION_SEPARATOR,
                 new Action("Messages", e -> EventBus.trigger(EventType.MESSAGES_CLICKED)),
                 ACTION_SEPARATOR,
-                new Action("Logout", e -> new LogoutUseCase().execute(new DefaultSubscriber()))
+                new Action("Logout", e -> EventBus.trigger(EventType.LOGOUT_CLICKED))
         );
     }
 
     public TopBar() {
         setToolbar();
 
-        EventBus.toObservable(EventType.AUTH).subscribe(new DefaultSubscriber<Object>() {
+        EventBus.toObservableFX(EventType.AUTH).subscribe(new DefaultSubscriber<Object>() {
             @Override
             public void onNext(Object o) {
                 getChildren().remove(toolBar);
                 setLayoutY(0);
                 setLayoutX(0);
+                System.out.println("asadssa");
                 toolBar = ActionUtils.updateToolBar(
                         toolBar,
                         Identity.isAuthenticated() ? authActions() : noAuthActions(),
@@ -80,9 +76,8 @@ public class TopBar extends Parent {
     }
 
     private void setToolbar() {
-        System.out.println(getLayoutBounds());
         toolBar = ActionUtils.createToolBar(
-                !Identity.isAuthenticated() ? authActions() : noAuthActions(),
+                Identity.isAuthenticated() ? authActions() : noAuthActions(),
                 ActionUtils.ActionTextBehavior.SHOW
         );
 

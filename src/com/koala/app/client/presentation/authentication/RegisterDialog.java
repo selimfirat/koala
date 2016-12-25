@@ -1,4 +1,4 @@
-package com.koala.app.client.presentation.register;
+package com.koala.app.client.presentation.authentication;
 
 import com.koala.app.client.presentation.CustomDialog;
 import javafx.event.ActionEvent;

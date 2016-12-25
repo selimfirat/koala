@@ -1,4 +1,4 @@
-package com.koala.app.client.presentation.login;
+package com.koala.app.client.presentation.authentication;
 
 import com.koala.app.client.data.user.User;
 import com.koala.app.client.domain.DefaultSubscriber;
@@ -41,16 +41,18 @@ public class LoginController implements IController {
 
     @FXML
     public void onClickLogin(ActionEvent event) {
-        Progress.start("Logging in...");
 
 
         String username = usernameTF.getText();
         String password = passwordTF.getText();
-        System.out.println("Username: " + username + "\nPassword: " + password);
-
         UseCase loginUseCase = new LoginUseCase(username, password);
 
         loginUseCase.execute(new DefaultSubscriber<User>() {
+
+            @Override
+            public void onStart() {
+                Progress.start("Logging in...");
+            }
 
             @Override
             public void onError(Throwable throwable) {
@@ -61,18 +63,17 @@ public class LoginController implements IController {
                         .title("Error during login")
                         .text("Wrong username or password!")
                         .showError();
+                System.out.println(throwable);
             }
 
             @Override
             public void onNext(User user) {
-                // on successful login
-                // TODO: do something with user
+                Progress.end();
+                onClickCancel(event);
             }
 
             @Override
             public void onCompleted() {
-                Progress.end();
-                onClickCancel(event);
             }
         });
     }

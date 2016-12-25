@@ -2,7 +2,6 @@ package com.koala.app.client.presentation.map;
 
 import com.koala.app.client.data.house.Location;
 import javafx.event.Event;
-import javafx.event.EventType;
 
 /**
  * Created by mrsfy on 18-Dec-16.

@@ -1,15 +1,15 @@
 var houseClusterer;
 
-
 var createMarker = function (location) {
 
     var marker = new google.maps.Marker({
         position: location
     });
 
-
     return marker;
 };
+
+var currentHouse;
 
 var addHouseMapMarker = function (house) {
 
@@ -20,13 +20,32 @@ var addHouseMapMarker = function (house) {
 
     marker.addListener("click", function () {
 
-        if (house) {
-            $("#house-seller").text(house.seller);
-            $("#house-title").text(house.title);
-            $("#house-comment").text(house.comment);
-        }
 
         $("#house-details").modal("open");
+        currentHouse = house;
+
+        for (key in house.houseFeatures) {
+            var val = house.houseFeatures[key];
+
+            if (houseOptions[key])
+                $("#house-details ." + key).text(houseOptions[key][val]);
+            else
+                $("#house-details ." + key).html(val);
+        }
+
+        app.error(JSON.stringify(house.seller));
+        app.error(JSON.stringify(house.houseFeatures));
+
+        $(".isFurnished").text(house.houseFeatures.furnished ? "Yes" : "No");
+        app.error(JSON.stringify(house.houseFeatures));
+
+        ["fullName", "phoneNumber", "email"].forEach(function (el) {
+            app.error(el);
+            app.error(house.seller[el]);
+            $("#house-details").find("." + el).text(house.seller[el]);
+        });
+
+
 
     });
 
@@ -38,7 +57,7 @@ var addHouseMapMarker = function (house) {
 
 var removeAllMarkers = function () {
     houseClusterer.clearMarkers();
-}
+};
 
 var initMarkers = function () {
     initMarkersClusterer();

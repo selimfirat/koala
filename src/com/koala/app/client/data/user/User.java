@@ -1,6 +1,7 @@
 package com.koala.app.client.data.user;
 
 import org.jongo.marshall.jackson.oid.MongoId;
+import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy
@@ -122,5 +123,17 @@ public class User {
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }
