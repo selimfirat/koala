@@ -18,8 +18,8 @@ public class SendMessageUseCase extends UseCase {
 
     public SendMessageUseCase(User to, String message) {
         this.message = new Message(
-                to,
                 Identity.getCurrentUser(),
+                to,
                 message,
                 new Date()
         );

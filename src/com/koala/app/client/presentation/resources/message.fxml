@@ -5,7 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" maxHeight="-Infinity" maxWidth="-Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.koala.app.client.presentation.messaging.MessageController">
+<TitledPane alignment="CENTER" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Messages" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.koala.app.client.presentation.messaging.MessagesController">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <children>
                 <SplitPane dividerPositions="0.28762541806020064" layoutX="-1.0" layoutY="-4.0" prefHeight="379.0" prefWidth="600.0">
                     <items>
@@ -23,5 +25,6 @@
                         </AnchorPane>
                     </items>
                 </SplitPane>
-            </children>
-</AnchorPane>
+            </children></AnchorPane>
+    </content>
+</TitledPane>

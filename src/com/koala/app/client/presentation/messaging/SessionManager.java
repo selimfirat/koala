@@ -28,9 +28,13 @@ public class SessionManager {
 
     }
 
-    private ChatSession getSessionByUser(User user){
+    public void addSessionWithUser(User user) {
+        chatSessions.add(new ChatSession(Identity.getCurrentUser(), user));
+    }
+
+    public ChatSession getSessionByUser(User user){
         for(ChatSession cs : chatSessions){
-            if(cs.getOpponent().equals(user)){
+            if (cs.getOpponent().equals(user)){
                 return cs;
             }
         }

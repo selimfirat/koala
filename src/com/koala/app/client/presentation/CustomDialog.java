@@ -21,8 +21,10 @@ import java.util.ResourceBundle;
  */
 public abstract class CustomDialog extends Stage implements Initializable {
 
+    protected FXMLLoader fxmlLoader;
+
     public CustomDialog(String dialogFile) {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("resources/" + dialogFile));
+        fxmlLoader = new FXMLLoader(App.class.getResource("resources/" + dialogFile));
 
         // Nice to have this in a load() method instead of constructor, but this seems to be de-facto standard.
         try

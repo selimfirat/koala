@@ -7,6 +7,7 @@ import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.authentication.LogoutUseCase;
 import com.koala.app.client.domain.houses.*;
+import com.koala.app.client.models.user.User;
 import com.koala.app.client.presentation.IController;
 import com.koala.app.client.presentation.Progress;
 import com.koala.app.client.presentation.StageUtils;
@@ -14,6 +15,7 @@ import com.koala.app.client.presentation.house_dialogs.EditHouseDialog;
 import com.koala.app.client.presentation.map.GoogleMap;
 import com.koala.app.client.presentation.map.MapClickEvent;
 import com.koala.app.client.presentation.house_dialogs.SellHouseDialog;
+import com.koala.app.client.presentation.messaging.MessagesDialog;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
 import org.controlsfx.control.Notifications;
@@ -56,6 +58,8 @@ public class MainController implements IController {
         EventBus.toObservableFX(EventType.REMOVE_HOUSE_CLICKED).subscribe(new RemoveHouseSubscriber());
         EventBus.toObservableFX(EventType.MY_OWN_PROPERTIES_CLICKED).subscribe(new MyOwnPropertiesSubscriber());
         EventBus.toObservableFX(EventType.LOGOUT_CLICKED).subscribe(new LogoutSubscriber());
+        EventBus.toObservableFX(EventType.SEND_MESSAGE_CLICKED).subscribe(new SendMessageSubscriber());
+
 
         UseCase mapHousesUseCase = new GetAllHousesUseCase();
         mapHousesUseCase.execute(new MapHousesSubscriber());
@@ -243,4 +247,12 @@ public class MainController implements IController {
         }
     }
 
+    private class SendMessageSubscriber extends DefaultSubscriber<Object> {
+        @Override
+        public void onNext(Object o) {
+
+            new MessagesDialog((User) o).showAndWait();
+
+        }
+    }
 }

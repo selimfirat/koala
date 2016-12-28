@@ -92,6 +92,5 @@ for pg in range(1, pageNumber):
     soup = BeautifulSoup(pageHtml, "html.parser")
     for div in soup.find_all("div", {"class": "list-item timeshare clearfix"}):
         link = div.find_all("a")
-        print link[0]
         pageParser = PageParser("http://www.hurriyetemlak.com"+link[0]['href'])
         json.dump(pageParser.getJSONData(), fp)

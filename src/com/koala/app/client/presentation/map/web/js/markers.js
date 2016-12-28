@@ -62,6 +62,13 @@ var removeAllMarkers = function () {
 var initMarkers = function () {
     initMarkersClusterer();
 
+
+    $("#send-message").click(function () {
+
+        if (app)
+            app.sendMessage(JSON.stringify(currentHouse.seller));
+
+    });
 };
 
 var initMarkersClusterer = function () {

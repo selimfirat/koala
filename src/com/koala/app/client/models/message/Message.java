@@ -18,6 +18,9 @@ public class Message implements Comparable<Message> {
     private String message;
     private Date date;
 
+    public Message() {
+    }
+
     public Message(User to, User from, String message, Date date) {
         this.to = to;
         this.from = from;

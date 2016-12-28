@@ -10,6 +10,7 @@ import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
 import com.koala.app.client.models.house.House;
 import com.koala.app.client.models.house.Location;
+import com.koala.app.client.models.user.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -199,4 +200,16 @@ public class GoogleMap extends Parent {
         }
         invokeJS("openMyOwnProperties(" + housesJson + ")");
     }
+
+    public void sendMessage(String toUserJson) {
+        User user = null;
+
+        try {
+            user = objectMapper.readValue(toUserJson, User.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        EventBus.trigger(EventType.SEND_MESSAGE_CLICKED, user);
+    };
 }

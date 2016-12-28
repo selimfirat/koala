@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
  * Created by ozlem on 10.12.2016.
  * Modified by Burak Erkilic on 24.12.2016.
  */
-public class MessageController implements IController{
+public class MessagesController implements IController{
 
     @FXML
     private ListView<String> contactListView;
@@ -41,12 +41,14 @@ public class MessageController implements IController{
     private ChatSession currentSession;
     private SessionManager sessionManager;
 
+    private User initialOpponent;
+
 
     @FXML
     void onClickSend(ActionEvent event) {
         Progress.start("Sending message...");
         UseCase sendMessageUseCase = new SendMessageUseCase(
-                Identity.getCurrentUser(), // get user from the session
+                currentSession.getOpponent(), // get user from the session
                 messageSendBox.getText()
         );
 
@@ -70,13 +72,17 @@ public class MessageController implements IController{
         });
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sessionManager = new SessionManager();
+
         sessionList = sessionManager.getChatSessions();
-        refresh();
-        renderMessages();
+
+        if (currentSession != null)
+            renderMessages();
+
+        setContactListView();
+
         contactListView.setOnMouseClicked(event -> {
             System.out.println("clicked on " + contactListView.getSelectionModel().getSelectedItem());
             for(ChatSession cs: sessionList){
@@ -109,8 +115,10 @@ public class MessageController implements IController{
         ObservableList<String> data = FXCollections.observableArrayList();
         for(ChatSession cs: sessionList){
             data.add(cs.getOpponent().getFullName());
+            System.out.println(cs.getOpponent().getFullName());
         }
         contactListView.setItems(data);
+
     }
 
     public void renderMessages(){
@@ -125,4 +133,15 @@ public class MessageController implements IController{
         messages.setText(result);
     }
 
+    public void setInitialOpponent(User initialOpponent) {
+        this.initialOpponent = initialOpponent;
+
+        if ( sessionManager.getSessionByUser(initialOpponent) == null)
+            sessionManager.addSessionWithUser(initialOpponent);
+
+        changeCurrentSession(sessionManager.getSessionByUser(initialOpponent));
+
+        renderMessages();
+        setContactListView();
+    }
 }
