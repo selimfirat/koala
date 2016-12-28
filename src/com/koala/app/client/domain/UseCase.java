@@ -1,9 +1,7 @@
 package com.koala.app.client.domain;
 
-import com.koala.app.client.data.user.User;
 import javafx.application.Platform;
 import rx.Observable;
-import rx.SingleSubscriber;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.schedulers.Schedulers;

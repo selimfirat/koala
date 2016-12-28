@@ -1,12 +1,8 @@
 package com.koala.app.client.domain.authentication;
 
-import com.koala.app.client.EventBus;
-import com.koala.app.client.EventType;
-import com.koala.app.client.data.SocketHelper;
-import com.koala.app.client.data.SocketListener;
-import com.koala.app.client.data.message.Message;
-import com.koala.app.client.data.user.Identity;
-import com.koala.app.client.data.user.User;
+import com.koala.app.client.domain.SocketHelper;
+import com.koala.app.client.models.user.Identity;
+import com.koala.app.client.models.user.User;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
 

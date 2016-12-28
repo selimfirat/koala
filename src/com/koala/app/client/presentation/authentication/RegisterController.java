@@ -40,6 +40,7 @@ public class RegisterController implements IController {
     @FXML
     void onClickCreate(ActionEvent event) {
         Progress.start("Creating account...");
+
         UseCase registerUseCase = new RegisterUseCase(
                 nameTF.getText(),
                 usernameTF.getText(),
@@ -59,22 +60,20 @@ public class RegisterController implements IController {
                         .title("Success")
                         .text("Account created successfully!")
                         .showInformation();
+
                 onClickCancel(event);
             }
 
             @Override
             public void onError(Throwable throwable) {
-                Platform.runLater(() -> {
-                    // on error
-                    Progress.end();
+                Progress.end();
 
-                    Notifications.create()
-                            .title("Error during registration")
-                            .text(throwable.getMessage())
-                            .showError();
-
-                });
+                Notifications.create()
+                        .title("Error during registration")
+                        .text(throwable.getMessage())
+                        .showError();
             }
+
         });
     }
 

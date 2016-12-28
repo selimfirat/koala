@@ -37,18 +37,9 @@ public abstract class CustomDialog extends Stage implements Initializable {
         initStyle(StageStyle.UTILITY);
     }
 
-    public CustomDialog(IController controller) {
-        FXMLLoader fxml = new FXMLLoader();
-        fxml.setController(controller);
-        Scene scene = null;
-        try {
-            scene = new Scene(fxml.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setScene(scene);
-        initStyle(StageStyle.UTILITY);
-
+    public CustomDialog(String dialogFile, String title) {
+        this(dialogFile);
+        setTitle(title);
     }
 
     @Override

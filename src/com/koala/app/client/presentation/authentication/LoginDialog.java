@@ -9,6 +9,6 @@ import com.koala.app.client.presentation.CustomDialog;
  */
 public class LoginDialog extends CustomDialog {
     public LoginDialog() {
-        super("login.fxml");
+        super("login.fxml", "Login");
     }
 }

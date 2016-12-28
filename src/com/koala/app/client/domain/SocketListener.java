@@ -1,4 +1,4 @@
-package com.koala.app.client.data;
+package com.koala.app.client.domain;
 
 /**
  * Created by mrsfy on 22-Dec-16.

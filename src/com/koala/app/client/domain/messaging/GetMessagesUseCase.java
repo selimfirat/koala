@@ -1,22 +1,26 @@
-package com.koala.app.client.domain.houses;
+package com.koala.app.client.domain.messaging;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.koala.app.client.domain.SocketHelper;
-import com.koala.app.client.models.house.House;
+import com.koala.app.client.models.message.Message;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
 
 import java.util.List;
 
 /**
- * Created by mrsfy on 24-Dec-16.
+ * Created by BurakMac on 24.12.2016.
  */
-public class MyOwnPropertiesUseCase extends UseCase {
+public class GetMessagesUseCase extends UseCase {
+    public GetMessagesUseCase() {
+    }
+
     @Override
-    protected Observable<House> buildUseCaseObservable() {
+    protected Observable<Message> buildUseCaseObservable() {
+
         return Observable
                 .create(subscriber ->
-                        SocketHelper.echo("GET_MY_OWN_PROPERTIES", null, new TypeReference<List<House>>() {},
+                        SocketHelper.echo("GET_MESSAGES", null, new TypeReference<List<Message>>() {},
                                 res -> {
                                     res.forEach(subscriber::onNext);
                                     subscriber.onCompleted();

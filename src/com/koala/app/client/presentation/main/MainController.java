@@ -2,7 +2,7 @@ package com.koala.app.client.presentation.main;
 
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
-import com.koala.app.client.data.house.House;
+import com.koala.app.client.models.house.House;
 import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.authentication.LogoutUseCase;
@@ -14,7 +14,6 @@ import com.koala.app.client.presentation.house_dialogs.EditHouseDialog;
 import com.koala.app.client.presentation.map.GoogleMap;
 import com.koala.app.client.presentation.map.MapClickEvent;
 import com.koala.app.client.presentation.house_dialogs.SellHouseDialog;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
 import org.controlsfx.control.Notifications;
@@ -56,11 +55,10 @@ public class MainController implements IController {
         EventBus.toObservableFX(EventType.EDIT_HOUSE_CLICKED).subscribe(new EditHouseSubscriber());
         EventBus.toObservableFX(EventType.REMOVE_HOUSE_CLICKED).subscribe(new RemoveHouseSubscriber());
         EventBus.toObservableFX(EventType.MY_OWN_PROPERTIES_CLICKED).subscribe(new MyOwnPropertiesSubscriber());
+        EventBus.toObservableFX(EventType.LOGOUT_CLICKED).subscribe(new LogoutSubscriber());
 
         UseCase mapHousesUseCase = new GetAllHousesUseCase();
         mapHousesUseCase.execute(new MapHousesSubscriber());
-
-        EventBus.toObservableFX(EventType.LOGOUT_CLICKED).subscribe(new LogoutSubscriber());
     }
 
 
@@ -92,25 +90,6 @@ public class MainController implements IController {
                 }
             });
 
-        }
-    }
-
-    private class LogoutSubscriber extends DefaultSubscriber<Object> {
-
-        @Override
-        public void onNext(Object o) {
-            LogoutUseCase logoutUseCase = new LogoutUseCase();
-            logoutUseCase.execute(new DefaultSubscriber() {
-                @Override
-                public void onStart() {
-                    Progress.start("Logging out...");
-                }
-
-                @Override
-                public void onCompleted() {
-                    Progress.end();
-                }
-            });
         }
     }
 
@@ -209,6 +188,25 @@ public class MainController implements IController {
             }
     }
 
+    private class LogoutSubscriber extends DefaultSubscriber<Object> {
+
+        @Override
+        public void onNext(Object o) {
+            LogoutUseCase logoutUseCase = new LogoutUseCase();
+            logoutUseCase.execute(new DefaultSubscriber() {
+                @Override
+                public void onStart() {
+                    Progress.start("Logging out...");
+                }
+
+                @Override
+                public void onCompleted() {
+                    Progress.end();
+                }
+            });
+        }
+    }
+
     private class RemoveHouseSubscriber extends DefaultSubscriber<Object> {
 
 
@@ -244,4 +242,5 @@ public class MainController implements IController {
 
         }
     }
+
 }

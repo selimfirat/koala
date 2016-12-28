@@ -1,4 +1,4 @@
-package com.koala.app.client.data.user;
+package com.koala.app.client.models.user;
 
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;

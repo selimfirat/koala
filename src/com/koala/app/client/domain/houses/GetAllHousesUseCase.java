@@ -1,8 +1,8 @@
 package com.koala.app.client.domain.houses;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.koala.app.client.data.SocketHelper;
-import com.koala.app.client.data.house.House;
+import com.koala.app.client.domain.SocketHelper;
+import com.koala.app.client.models.house.House;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
 import java.util.List;

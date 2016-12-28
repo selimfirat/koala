@@ -1,4 +1,4 @@
-package com.koala.app.client.data.house;
+package com.koala.app.client.models.house;
 
 /**
  * Created by mrsfy on 13-Dec-16.

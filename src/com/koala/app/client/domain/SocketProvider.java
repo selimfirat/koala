@@ -1,4 +1,4 @@
-package com.koala.app.client.data;
+package com.koala.app.client.domain;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;

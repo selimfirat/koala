@@ -1,17 +1,11 @@
-package com.koala.app.client.data;
+package com.koala.app.client.domain;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.koala.app.client.data.house.House;
-import com.koala.app.client.data.user.User;
-import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * Created by mrsfy on 22-Dec-16.

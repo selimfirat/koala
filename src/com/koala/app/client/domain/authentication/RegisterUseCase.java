@@ -1,9 +1,7 @@
 package com.koala.app.client.domain.authentication;
 
-import com.koala.app.client.data.SocketHelper;
-import com.koala.app.client.data.SocketListener;
-import com.koala.app.client.data.SocketProvider;
-import com.koala.app.client.data.user.User;
+import com.koala.app.client.domain.SocketHelper;
+import com.koala.app.client.models.user.User;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
 import rx.Subscriber;
@@ -50,19 +48,17 @@ public class RegisterUseCase extends UseCase {
         user.setPassword(Encryption.getMD5(user.getPassword()));
 
 
-        return Observable.create(subscriber -> {
-            SocketHelper.echo("REGISTER", user, String.class, res -> {
+        return Observable.create(subscriber -> SocketHelper.echo("REGISTER", user, String.class, res -> {
 
-                if (res.equals("USERNAME_EXISTS"))
-                    subscriber.onError(new ValidationException("This username already exists!"));
-                else if (res.equals("EMAIL_EXISTS"))
-                    subscriber.onError(new ValidationException("This email already exists!"));
-                else {
-                    System.out.println(res);
-                    subscriber.onCompleted();
-                }
+            if (res.equals("USERNAME_EXISTS"))
+                subscriber.onError(new ValidationException("This username already exists!"));
+            else if (res.equals("EMAIL_EXISTS"))
+                subscriber.onError(new ValidationException("This email already exists!"));
+            else {
+                System.out.println(res);
+                subscriber.onCompleted();
+            }
 
-            });
-        });
+        }));
     }
 }

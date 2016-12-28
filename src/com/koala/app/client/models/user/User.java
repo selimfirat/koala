@@ -1,7 +1,6 @@
-package com.koala.app.client.data.user;
+package com.koala.app.client.models.user;
 
 import org.jongo.marshall.jackson.oid.MongoId;
-import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 /**
  * Author: Selim Fırat Yılmaz - mrsfy

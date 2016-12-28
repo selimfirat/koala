@@ -1,9 +1,9 @@
 package com.koala.app.client.domain.houses;
 
-import com.koala.app.client.data.SocketHelper;
-import com.koala.app.client.data.house.House;
-import com.koala.app.client.data.house.Location;
-import com.koala.app.client.data.user.Identity;
+import com.koala.app.client.domain.SocketHelper;
+import com.koala.app.client.models.house.House;
+import com.koala.app.client.models.house.Location;
+import com.koala.app.client.models.user.Identity;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
 

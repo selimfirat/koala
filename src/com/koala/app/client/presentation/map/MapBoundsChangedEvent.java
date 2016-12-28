@@ -1,6 +1,6 @@
 package com.koala.app.client.presentation.map;
 
-import com.koala.app.client.data.house.Location;
+import com.koala.app.client.models.house.Location;
 import javafx.event.Event;
 
 /**

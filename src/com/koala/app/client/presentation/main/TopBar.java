@@ -2,11 +2,12 @@ package com.koala.app.client.presentation.main;
 
 import com.koala.app.client.EventBus;
 import com.koala.app.client.EventType;
-import com.koala.app.client.data.user.Identity;
+import com.koala.app.client.models.user.Identity;
 import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.presentation.authentication.LoginDialog;
 import com.koala.app.client.presentation.authentication.RegisterDialog;
 import com.koala.app.client.presentation.StageUtils;
+import com.koala.app.client.presentation.messaging.MessageDialog;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.ToolBar;
@@ -49,7 +50,7 @@ public class TopBar extends Parent {
                 ACTION_SEPARATOR,
                 new Action("Favorites", e -> EventBus.trigger(EventType.FAVORITES_CLICKED)),
                 ACTION_SEPARATOR,
-                new Action("Messages", e -> EventBus.trigger(EventType.MESSAGES_CLICKED)),
+                new Action("Messages", e -> new MessageDialog().showAndWait()),
                 ACTION_SEPARATOR,
                 new Action("Logout", e -> EventBus.trigger(EventType.LOGOUT_CLICKED))
         );

@@ -1,10 +1,8 @@
 package com.koala.app.client.domain.houses;
 
-import com.koala.app.client.data.SocketHelper;
-import com.koala.app.client.data.SocketListener;
+import com.koala.app.client.domain.SocketHelper;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
-import rx.Subscriber;
 
 /**
  * Created by mrsfy on 24-Dec-16.

@@ -1,7 +1,7 @@
 package com.koala.app.client.domain.authentication;
 
-import com.koala.app.client.data.SocketHelper;
-import com.koala.app.client.data.user.Identity;
+import com.koala.app.client.domain.SocketHelper;
+import com.koala.app.client.models.user.Identity;
 import com.koala.app.client.domain.UseCase;
 import rx.Observable;
 

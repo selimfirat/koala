@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
  */
 public class RegisterDialog extends CustomDialog {
     public RegisterDialog() {
-        super("register.fxml");
+        super("register.fxml", "Register");
     }
 
 
