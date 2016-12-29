@@ -22,7 +22,7 @@ public class EventBus {
     }
 
     public static Observable<Object> toObservableFX(EventType type) {
-        return bus.get(type).observeOn(Schedulers.from(command -> Platform.runLater(command)));
+        return bus.get(type).subscribeOn(Schedulers.from(Platform::runLater)).observeOn(Schedulers.from(Platform::runLater));
     }
     public static Observable<Object> toObservable(EventType type) {
         return bus.get(type);

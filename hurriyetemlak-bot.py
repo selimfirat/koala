@@ -54,18 +54,27 @@ class PageParser:
         # @return List of size, section, age of building, floor, total floor
         return result
 
-    def getJSONData(self):
+    def getJSONData(self, i):
         coor = self.findCoordinates()
         houseFeatures = self.findBuildingProperties()
         value = self.findTotalValue()
         title = self.findTitle()
         description = self.findDescription()
         d = {
+             "_id": str(i),
             "houseType": "FOR_SALE",
             "location": {
                 "longitude": coor[1],
                 "latitude": coor[0]
-                },
+            },
+            "seller": {
+                "fullName" : "Selim Yılmaz",
+                "password" : "3dc231ebed3a7acc761a0df580608897",
+                "email" : "mrsfy@outlook.com",
+                "username" : "mrsfy",
+                "phoneNumber" : "05396445163",
+                "_id" : "10ec3001-76f8-4aba-9813-67be7a7a23c3"
+            },
             "houseFeatures": {
                 "currentFloor": int(houseFeatures[u'Bulunduğu Kat']) if u'Bulunduğu Kat' in houseFeatures and not re.search('[a-zA-Z]', houseFeatures[u'Bulunduğu Kat']) else '',
                 "totalFloor": int(houseFeatures[u'Kat Sayısı']) if u'Kat Sayısı' in houseFeatures else '',
@@ -75,15 +84,17 @@ class PageParser:
                 "size": int(re.sub("\D", "", houseFeatures[u'Metrekare'])) if 'Metrekare' in houseFeatures else '',
                 "ageOfBuilding": int(houseFeatures[u'Bina Yaşı']) if u'Bina Yaşı' in houseFeatures else '',
                 "roomNumber": houseFeatures[u'Oda + Salon'][0] if u'Oda + Salon' in houseFeatures else '',
-                "title": title
+                "title": title,
+                "comments": "Fetched from HurriyetEmlak..."
                 }
         }
         return d
 
 
-pageNumber = 2
+pageNumber = 50
 output = []
 fp = open('result.json', 'a')
+i = 0
 for pg in range(1, pageNumber):
     current_url = "http://www.hurriyetemlak.com/satilik-daire?page=" + str(pg)
     pageFile = urllib2.urlopen(current_url)
@@ -92,5 +103,6 @@ for pg in range(1, pageNumber):
     soup = BeautifulSoup(pageHtml, "html.parser")
     for div in soup.find_all("div", {"class": "list-item timeshare clearfix"}):
         link = div.find_all("a")
+        i += 1
         pageParser = PageParser("http://www.hurriyetemlak.com"+link[0]['href'])
-        json.dump(pageParser.getJSONData(), fp)
+        json.dump(pageParser.getJSONData(i), fp)

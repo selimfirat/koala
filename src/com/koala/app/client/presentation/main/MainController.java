@@ -247,6 +247,7 @@ public class MainController implements IController {
         }
     }
 
+
     private class SendMessageSubscriber extends DefaultSubscriber<Object> {
         @Override
         public void onNext(Object o) {
