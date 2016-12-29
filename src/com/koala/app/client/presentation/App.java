@@ -6,6 +6,8 @@ package com.koala.app.client.presentation;
  */
 
 import com.koala.app.client.domain.SocketProvider;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -13,13 +15,16 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.jongo.Jongo;
 
 import java.io.IOException;
 
 public class App extends Application {
 
-    public static void main(String[] args) {
+    public static Jongo jongo;
 
+    public static void main(String[] args) {
+        jongo = new Jongo(new MongoClient(new MongoClientURI("mongodb://msg:123123@ds119618.mlab.com:19618/koala")).getDB("koala"));
         SocketProvider.getSocket();
 
         launch();

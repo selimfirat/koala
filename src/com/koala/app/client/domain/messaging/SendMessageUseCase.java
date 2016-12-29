@@ -16,9 +16,9 @@ public class SendMessageUseCase extends UseCase {
 
     private Message message;
 
-    public SendMessageUseCase(User to, String message) {
+    public SendMessageUseCase(String to, String message) {
         this.message = new Message(
-                Identity.getCurrentUser(),
+                Identity.getCurrentUser().getId(),
                 to,
                 message,
                 new Date()

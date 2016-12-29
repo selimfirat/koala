@@ -10,16 +10,16 @@ import java.util.Comparator;
  */
 public class ChatSession {
 
-    private User me, opponent;
+    private String me, opponent;
     private ArrayList<Message> messageList;
 
-    public ChatSession(User me, User opponent) {
+    public ChatSession(String me, String opponent) {
         this.me = me;
         this.opponent = opponent;
         this.messageList = new ArrayList<>();
     }
 
-    public ChatSession(User me, User opponent, ArrayList<Message> messageList) {
+    public ChatSession(String me, String opponent, ArrayList<Message> messageList) {
         this.me = me;
         this.opponent = opponent;
         this.messageList = messageList;
@@ -37,11 +37,11 @@ public class ChatSession {
         messageList.sort(Comparator.comparing(Message::getDate));
     }
 
-    public User getMe() {
+    public String getMe() {
         return me;
     }
 
-    public User getOpponent() {
+    public String getOpponent() {
         return opponent;
     }
 

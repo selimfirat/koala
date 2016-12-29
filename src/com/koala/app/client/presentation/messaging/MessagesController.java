@@ -7,6 +7,7 @@ import com.koala.app.client.domain.DefaultSubscriber;
 import com.koala.app.client.domain.UseCase;
 import com.koala.app.client.domain.messaging.SendMessageUseCase;
 import com.koala.app.client.models.user.User;
+import com.koala.app.client.presentation.App;
 import com.koala.app.client.presentation.IController;
 import com.koala.app.client.presentation.Progress;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
+import org.jongo.MongoCollection;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,13 +37,13 @@ public class MessagesController implements IController{
     private TextArea messages;
 
     @FXML
-    private TextField messageSendBox; // Problematic
+    private TextArea messageSendBox; // Problematic
 
     private ArrayList<ChatSession> sessionList;
     private ChatSession currentSession;
     private SessionManager sessionManager;
 
-    private User initialOpponent;
+    private String initialOpponent;
 
 
     @FXML
@@ -70,11 +72,13 @@ public class MessagesController implements IController{
                         .showError();
             }
         });
+        sessionList = sessionManager.getChatSessions();
+        renderMessages();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        sessionManager = new SessionManager();
+        sessionManager = new SessionManager(App.jongo);
 
         sessionList = sessionManager.getChatSessions();
 
@@ -86,7 +90,7 @@ public class MessagesController implements IController{
         contactListView.setOnMouseClicked(event -> {
             System.out.println("clicked on " + contactListView.getSelectionModel().getSelectedItem());
             for(ChatSession cs: sessionList){
-                if(cs.getOpponent().getFullName().equals(contactListView.getSelectionModel().getSelectedItem()) ){
+                if(cs.getOpponent().equals(contactListView.getSelectionModel().getSelectedItem()) ){
                     changeCurrentSession(cs);
                     renderMessages();
                     return;
@@ -114,8 +118,7 @@ public class MessagesController implements IController{
     public void setContactListView(){
         ObservableList<String> data = FXCollections.observableArrayList();
         for(ChatSession cs: sessionList){
-            data.add(cs.getOpponent().getFullName());
-            System.out.println(cs.getOpponent().getFullName());
+            data.add(cs.getOpponent());
         }
         contactListView.setItems(data);
 
@@ -125,7 +128,7 @@ public class MessagesController implements IController{
         String result = "";
         messages.setText("");
         for(Message m: currentSession.getMessageList()){
-            result += m.getFrom().getFullName();
+            result += m.getFrom();
             result += "\n";
             result += m.getMessage();
             result += "\n\n";
@@ -133,7 +136,7 @@ public class MessagesController implements IController{
         messages.setText(result);
     }
 
-    public void setInitialOpponent(User initialOpponent) {
+    public void setInitialOpponent(String initialOpponent) {
         this.initialOpponent = initialOpponent;
 
         if ( sessionManager.getSessionByUser(initialOpponent) == null)

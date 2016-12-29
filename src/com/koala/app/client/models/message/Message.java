@@ -13,15 +13,15 @@ public class Message implements Comparable<Message> {
     @MongoId
     private String id;
 
-    private User to;
-    private User from;
+    private String to;
+    private String from;
     private String message;
     private Date date;
 
     public Message() {
     }
 
-    public Message(User to, User from, String message, Date date) {
+    public Message(String to, String from, String message, Date date) {
         this.to = to;
         this.from = from;
         this.message = message;
@@ -37,19 +37,19 @@ public class Message implements Comparable<Message> {
         this.id = id;
     }
 
-    public User getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(User to) {
+    public void setTo(String to) {
         this.to = to;
     }
 
-    public User getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(User from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 

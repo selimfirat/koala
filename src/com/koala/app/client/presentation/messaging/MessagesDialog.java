@@ -17,7 +17,7 @@ public class MessagesDialog extends CustomDialog {
 
         fxmlLoader.
                 <MessagesController>getController()
-                .setInitialOpponent(user);
+                .setInitialOpponent(user.getId());
         System.out.println(user);
     }
 }

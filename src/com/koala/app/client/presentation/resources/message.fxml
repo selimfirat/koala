@@ -18,7 +18,7 @@
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                             <children>
-                                <TextField fx:id="messageSendBox" layoutY="338.0" prefHeight="25.0" prefWidth="341.0" />
+                                <TextArea fx:id="messageSendBox" layoutY="338.0" prefHeight="25.0" prefWidth="341.0" />
                                 <TextArea fx:id="messages" layoutX="2.0" prefHeight="334.0" prefWidth="419.0" />
                                 <Button layoutX="357.0" layoutY="338.0" mnemonicParsing="false" onAction="#onClickSend" text="Send" />
                             </children>
