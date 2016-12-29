@@ -24,7 +24,7 @@ public class App extends Application {
     public static Jongo jongo;
 
     public static void main(String[] args) {
-        jongo = new Jongo(new MongoClient(new MongoClientURI("mongodb://msg:123123@ds119618.mlab.com:19618/koala")).getDB("koala"));
+        jongo = new Jongo(new MongoClient(new MongoClientURI("mongodb://message_user:koala123@ds119618.mlab.com:19618/koala")).getDB("koala"));
         SocketProvider.getSocket();
 
         launch();

@@ -72,7 +72,13 @@ public class MessagesController implements IController{
                         .showError();
             }
         });
-        sessionList = sessionManager.getChatSessions();
+        sessionManager.getMessagesFromDataBase();
+        renderMessages();
+    }
+
+    @FXML
+    void onClickRefresh(ActionEvent event){
+        refresh();
         renderMessages();
     }
 
@@ -90,7 +96,7 @@ public class MessagesController implements IController{
         contactListView.setOnMouseClicked(event -> {
             System.out.println("clicked on " + contactListView.getSelectionModel().getSelectedItem());
             for(ChatSession cs: sessionList){
-                if(cs.getOpponent().equals(contactListView.getSelectionModel().getSelectedItem()) ){
+                if(getUserbyID(cs.getOpponent()).getFullName().equals(contactListView.getSelectionModel().getSelectedItem()) ){
                     changeCurrentSession(cs);
                     renderMessages();
                     return;
@@ -102,6 +108,7 @@ public class MessagesController implements IController{
     }
 
     public void refresh(){
+        sessionManager.getMessagesFromDataBase();
         sessionList = sessionManager.getChatSessions();
 
         if (sessionList.size() > 0)
@@ -118,17 +125,18 @@ public class MessagesController implements IController{
     public void setContactListView(){
         ObservableList<String> data = FXCollections.observableArrayList();
         for(ChatSession cs: sessionList){
-            data.add(cs.getOpponent());
+            data.add(getUserbyID(cs.getOpponent()).getFullName());
         }
         contactListView.setItems(data);
 
     }
 
     public void renderMessages(){
+        sessionList = sessionManager.getChatSessions();
         String result = "";
         messages.setText("");
         for(Message m: currentSession.getMessageList()){
-            result += m.getFrom();
+            result += getUserbyID(m.getFrom()).getFullName();
             result += "\n";
             result += m.getMessage();
             result += "\n\n";
@@ -146,5 +154,10 @@ public class MessagesController implements IController{
 
         renderMessages();
         setContactListView();
+    }
+
+    private User getUserbyID(String id){
+        MongoCollection users = App.jongo.getCollection("users");
+        return users.findOne("{_id: #}", id).as(User.class);
     }
 }

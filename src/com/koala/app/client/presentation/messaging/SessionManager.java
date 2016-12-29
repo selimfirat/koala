@@ -28,6 +28,7 @@ public class SessionManager {
         chatSessions = new ArrayList<ChatSession>();
         this.jongo = jongo;
         messages = jongo.getCollection("messages");
+        getMessagesFromDataBase();
     }
 
     public void addSessionWithUser(String user) {
@@ -44,13 +45,14 @@ public class SessionManager {
     }
 
     public void getMessagesFromDataBase(){
-        MongoCursor<Message> messageCursor = messages.find("{ $or: [{from._id: #}, {to._id: #}]}", Identity.getCurrentUser().getId(), Identity.getCurrentUser().getId()).as(Message.class);
+        MongoCursor<Message> messageCursor = messages.find("{ $or: [{from: #}, {to: #}]}", Identity.getCurrentUser().getId(), Identity.getCurrentUser().getId()).as(Message.class);
         while(messageCursor.hasNext()){
             allMessages.add(messageCursor.next());
         }
     }
 
     public ArrayList<ChatSession> getChatSessions(){
+        getMessagesFromDataBase();
         setChatSessions();
         for(ChatSession cs : chatSessions)
             cs.sortMessages();
