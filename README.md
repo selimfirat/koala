@@ -1,5 +1,5 @@
 # koala
-This is a CS 102 project. Got 100/100 on demo. Server files is on [mrsfy/koala_server](https://github.com/mrsfy/koala_server) repository.
+This is a CS 102 project. Got 100/100 on demo. Server files is on [mrsfy/koala-server](https://github.com/mrsfy/koala-server) repository.
 
 ## Reports & Demo Presentation
 * [Requirements Specification Report](Reports/RequirementSpecificationReport.pdf)
